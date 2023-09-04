@@ -1,11 +1,18 @@
 mod ll;
 mod mr;
 
+use crate::ll::gen_prime_num;
 use ll::is_prime_lucal_lehmer;
 use mr::is_prime_miller_rabin;
+use rand::Rng;
+use rug::rand::RandState;
 use rug::{Assign, Integer};
 
-use crate::ll::gen_prime_num;
+/*
+    - 素数を100個、素数じゃない奇数を100個用意して、それぞれのアルゴリズムで判定。
+    - 判定にかかった時間と正解率のコスパが良いものはどれか
+    - 1024〜4096 bit
+*/
 
 fn main() {
     let mut int = Integer::new();
@@ -15,13 +22,23 @@ fn main() {
     let p = Integer::from(int);
     let k = Integer::from(4);
 
-    match is_prime_miller_rabin(p.clone(), k.clone()) {
-        true => println!("=====\n{} is Prime\n=====", &p),
-        false => println!("=====\n{} is Not Prime\n=====", &p),
-    };
-
-    match is_prime_lucal_lehmer(p.clone()) {
-        true => println!("=====\n{} is Prime\n=====", &p),
-        false => println!("=====\n{} is Not Prime\n=====", &p),
+    // HACK: 乱数生成用テストコード
+    let mut rand = RandState::new();
+    // let mut i = Integer::from(Integer::random_bits(1024, &mut rand));
+    // println!("{}", i);
+    for i in 0..10 {
+        let mut i = Integer::from(Integer::random_bits(1024, &mut rand));
+        i.assign(Integer::random_bits(1024, &mut rand));
+        println!("\n {}", i);
     }
+    // HACK: 判定テスト用
+    // match is_prime_miller_rabin(p.clone(), k.clone()) {
+    //     true => println!("=====\n{} is Prime\n=====", &p),z
+    //     false => println!("=====\n{} is Not Prime\n=====", &p),
+    // };
+
+    // match is_prime_lucal_lehmer(p.clone()) {
+    //     true => println!("=====\n{} is Prime\n=====", &p),
+    //     false => println!("=====\n{} is Not Prime\n=====", &p),
+    // }
 }
