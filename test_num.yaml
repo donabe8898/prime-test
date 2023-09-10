@@ -1,0 +1,6 @@
+# prime
+- number: ""
+  is_prime: true
+
+- number: "14"
+  is_prime: false

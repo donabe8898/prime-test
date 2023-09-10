@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use rand::Rng;
 use rug::Integer;
 
@@ -46,11 +48,20 @@ pub fn is_prime_miller_rabin(p: Integer, k: Integer) -> bool {
     };
 
     let mut count = Integer::from(0);
+    let mut set = HashSet::new();
     let res = loop {
         if count > k {
             break true;
         }
-        let a = random_num(p.clone());
+        let a = loop {
+            let i = random_num(p.clone());
+            if !set.contains(&i) {
+                set.insert(i.clone());
+                break i;
+            }
+        };
+        // let a = random_num(p.clone());
+
         if !is_prime(p.clone(), a) {
             break false;
         }
