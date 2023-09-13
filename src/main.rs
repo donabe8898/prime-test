@@ -1,5 +1,7 @@
 mod ll;
 mod mr;
+mod yaml;
+extern crate yaml_rust;
 
 use crate::ll::gen_prime_num;
 use ll::is_prime_lucal_lehmer;
@@ -7,6 +9,8 @@ use mr::is_prime_miller_rabin;
 use rand::Rng;
 use rug::rand::RandState;
 use rug::{Assign, Integer};
+use yaml::load_yaml;
+use yaml_rust::{YamlEmitter, YamlLoader};
 
 /*
     - 素数を100個、素数じゃない奇数を100個用意して、それぞれのアルゴリズムで判定。
@@ -14,35 +18,61 @@ use rug::{Assign, Integer};
     - 1024〜4096 bit
 */
 
-fn main() {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut int = Integer::new();
-    let decimal = "1475979915214180235084898622737381736312066145333169775147771216478570297878078949377407337049389289382748507531496480477281264838760259191814463365330269540496961201113430156902396093989090226259326935025281409614983499388222831448598601834318536230923772641390209490231836446899608210795482963763094236630945410832793769905399982457186322944729636418890623372171723742105636440368218459649632948538696905872650486914434637457507280441823676813517852099348660847172579408422316678097670224011990280170474894487426924742108823536808485072502240519452587542875349976558572670229633962575212637477897785501552646522609988869914013540483809865681250419497686697771011";
+    let decimal = "";
     int.assign(Integer::parse(decimal).unwrap());
 
     let p = Integer::from(int);
     let k = Integer::from(4);
 
+    // TODO: 本番
+    let path = "./test_num.yaml";
+    let docs = load_yaml(&path);
+    let doc = &docs[0];
+
+    // TODO: miller-rabinテストの実行時間計測
+
+    // TODO: リュカ-レーマ-テストの実行時間計測
+
+    // HACK: yamlのテストコード
+    let path = "./test_num.yaml";
+    let docs = load_yaml(&path);
+    let doc = &docs[0];
+    // numberを取り出す
+    let number = &doc[0]["number"];
+    // is_primeを取り出す
+    let is_prime = &doc[0]["is_prime"];
+
+    for data in doc.clone() {
+        println!(
+            "{}, {}",
+            data["number"].as_str().unwrap(),
+            data["is_prime"].as_bool().unwrap()
+        );
+    }
+
     // HACK: 乱数生成用テストコード
-    // let mut rand = RandState::new();
-    // let mut i = Integer::from(Integer::random_bits(1024, &mut rand));
-    // println!("{}", i);
     // let mut idx = 0;
-    // while (idx < 5) {
-    //     let mut i = Integer::from(Integer::random_bits(1024, &mut rand));
-    //     i.assign(Integer::random_bits(1024, &mut rand));
-    //     if &i % Integer::from(2) != 0 {
-    //         println!("\n {}", i);
-    //         idx += 1;
-    //     }
+    // let mut rand = RandState::new();
+    // while (idx < 100) {
+    //     let mut i = Integer::from(Integer::random_bits(4096, &mut rand));
+
+    //     // if &i % Integer::from(2) != 0 {
+    //     //     idx += 1;
+    //     // }
+    //     idx += 1;
+    //     println!("{}", idx);
     // }
     // HACK: 判定テスト用
-    match is_prime_miller_rabin(p.clone(), k.clone()) {
-        true => println!("=====\n{} is Prime\n=====", &p),
-        false => println!("=====\n{} is Not Prime\n=====", &p),
-    };
+    // match is_prime_miller_rabin(p.clone(), k.clone()) {
+    //     true => println!("=====\n{} is Prime\n=====", &p),
+    //     false => println!("=====\n{} is Not Prime\n=====", &p),
+    // };
 
     // match is_prime_lucal_lehmer(p.clone()) {
     //     true => println!("=====\n{} is Prime\n=====", &p),
     //     false => println!("=====\n{} is Not Prime\n=====", &p),
     // }
+    Ok(())
 }
