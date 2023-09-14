@@ -3,6 +3,7 @@ name = "prime-test"
 version = "0.1.0"
 edition = "2021"
 
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
@@ -10,3 +11,16 @@ proconio = "0.4.3"
 rug = "1.19.2"
 rand = "0.6"
 yaml-rust = "0.4"
+
+[dev-dependencies]
+criterion = { version = "0.4", features = ["html_reports"] }
+
+[[bench]]
+name = "benchmark"
+# なんかフルパスじゃないと動かない
+path = "/home/yugo/git/prime-test/src/benches/benchmark.rs"
+harness = false
+
+[lib]
+name = "mylib"
+path = "src/lib.rs"
