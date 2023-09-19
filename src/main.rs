@@ -1,16 +1,16 @@
-mod ll;
-mod mr;
-mod yaml;
-extern crate yaml_rust;
+// mod ll;
+// mod mr;
+// mod yaml;
+// extern crate yaml_rust;
 
-use crate::ll::gen_prime_num;
-use ll::is_prime_lucal_lehmer;
-use mr::is_prime_miller_rabin;
-use rand::Rng;
-use rug::rand::RandState;
-use rug::{Assign, Integer};
-use yaml::load_yaml;
-use yaml_rust::{YamlEmitter, YamlLoader};
+// use crate::ll::gen_prime_num;
+// use ll::is_prime_lucal_lehmer;
+// use mr::is_prime_miller_rabin;
+// use rand::Rng;
+// use rug::rand::RandState;
+// use rug::{Assign, Integer};
+// use yaml::load_yaml;
+// use yaml_rust::{YamlEmitter, YamlLoader};
 
 /*
     - 素数を100個、素数じゃない奇数を100個用意して、それぞれのアルゴリズムで判定。
@@ -18,39 +18,40 @@ use yaml_rust::{YamlEmitter, YamlLoader};
     - 1024〜4096 bit
 */
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let mut int = Integer::new();
-    let decimal = "";
-    int.assign(Integer::parse(decimal).unwrap());
+fn main() /*-> Result<(), Box<dyn std::error::Error>> */
+{
+    // let mut int = Integer::new();
+    // let decimal = "";
+    // int.assign(Integer::parse(decimal).unwrap());
 
-    let p = Integer::from(int);
-    let k = Integer::from(4);
+    // let p = Integer::from(int);
+    // let k = Integer::from(4);
 
-    // TODO: 本番
-    let path = "./test_num.yaml";
-    let docs = load_yaml(&path);
-    let doc = &docs[0];
+    // // TODO: 本番
+    // let path = "./test_num.yaml";
+    // let docs = load_yaml(&path);
+    // let doc = &docs[0];
 
-    // TODO: miller-rabinテストの実行時間計測
+    // // TODO: miller-rabinテストの実行時間計測
 
-    // TODO: リュカ-レーマ-テストの実行時間計測
+    // // TODO: リュカ-レーマ-テストの実行時間計測
 
-    // HACK: yamlのテストコード
-    let path = "./test_num.yaml";
-    let docs = load_yaml(&path);
-    let doc = &docs[0];
-    // numberを取り出す
-    let number = &doc[0]["number"];
-    // is_primeを取り出す
-    let is_prime = &doc[0]["is_prime"];
+    // // HACK: yamlのテストコード
+    // let path = "./test_num.yaml";
+    // let docs = load_yaml(&path);
+    // let doc = &docs[0];
+    // // numberを取り出す
+    // let number = &doc[0]["number"];
+    // // is_primeを取り出す
+    // let is_prime = &doc[0]["is_prime"];
 
-    for data in doc.clone() {
-        println!(
-            "{}, {}",
-            data["number"].as_str().unwrap(),
-            data["is_prime"].as_bool().unwrap()
-        );
-    }
+    // for data in doc.clone() {
+    //     println!(
+    //         "{}, {}",
+    //         data["number"].as_str().unwrap(),
+    //         data["is_prime"].as_bool().unwrap()
+    //     );
+    // }
 
     // HACK: 乱数生成用テストコード
     // let mut idx = 0;
@@ -64,6 +65,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     //     idx += 1;
     //     println!("{}", idx);
     // }
+
     // HACK: 判定テスト用
     // match is_prime_miller_rabin(p.clone(), k.clone()) {
     //     true => println!("=====\n{} is Prime\n=====", &p),
@@ -74,5 +76,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     //     true => println!("=====\n{} is Prime\n=====", &p),
     //     false => println!("=====\n{} is Not Prime\n=====", &p),
     // }
-    Ok(())
+
+    // Ok(())
 }

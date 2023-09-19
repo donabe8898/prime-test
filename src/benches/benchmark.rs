@@ -1,19 +1,15 @@
 use criterion::{criterion_group, criterion_main, Criterion};
 
-use mylib::ll;
-use mylib::mr;
+use mylib::test;
+
 use rug::{Assign, Integer};
 
 fn bm1(c: &mut Criterion) {
-    c.bench_function("mr", |b| {
-        b.iter(|| mr::is_prime_miller_rabin(Integer::from(133331), Integer::from(6)))
-    });
+    c.bench_function("mr", |b| b.iter(|| test::mr_bench(4096)));
 }
 
 fn bm2(c: &mut Criterion) {
-    c.bench_function("ll", |b| {
-        b.iter(|| ll::is_prime_lucal_lehmer(Integer::from(133331)))
-    });
+    c.bench_function("ll", |b| b.iter(|| test::llr_bench(4096)));
 }
 
 criterion_group!(benches, bm1, bm2);

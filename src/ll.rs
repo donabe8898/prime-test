@@ -1,7 +1,6 @@
-use std::collections::btree_set::Intersection;
-
 use rand::Rng;
 use rug::Integer;
+use std::collections::btree_set::Intersection;
 
 pub fn is_prime_lucal_lehmer(p: Integer) -> bool {
     if &p <= &Integer::from(1) || !(&p.get_bit(0)) {

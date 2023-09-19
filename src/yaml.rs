@@ -1,3 +1,5 @@
+// HACK: yaml読み取り
+
 use std::fs;
 extern crate yaml_rust;
 use yaml_rust::{YamlEmitter, YamlLoader};
