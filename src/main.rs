@@ -20,12 +20,12 @@ use yaml_rust::{YamlEmitter, YamlLoader};
 
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
-    let mut int = Integer::new();
-    let decimal = "524287";
-    int.assign(Integer::parse(decimal).unwrap());
+    // let mut int = Integer::new();
+    // let decimal = "524287";
+    // int.assign(Integer::parse(decimal).unwrap());
 
-    let p = Integer::from(int);
-    let k = Integer::from(4);
+    // let p = Integer::from(int);
+    // let k = Integer::from(4);
 
     // // TODO: 本番
     // let path = "./test_num.yaml";
@@ -65,18 +65,20 @@ fn main() /*-> Result<(), Box<dyn std::error::Error>> */
     //     idx += 1;
     //     println!("{}", idx);
     // }
-
     // HACK: 判定テスト用
-    match is_prime_miller_rabin(p.clone(), k.clone()) {
-        true => println!("=====\n{} is Prime\n=====", &p),
-        false => println!("=====\n{} is Not Prime\n=====", &p),
-    };
-    // 17 -> 19
-    let lucas = gen_lucas(19);
-    match is_prime_lucal_lehmer(p.clone(), lucas) {
-        true => println!("=====\n{} is Prime\n=====", &p),
-        false => println!("=====\n{} is Not Prime\n=====", &p),
-    }
+
+    // match is_prime_miller_rabin(p.clone(), k.clone()) {
+    //     true => println!("=====\n{} is Prime\n=====", &p),
+    //     false => println!("=====\n{} is Not Prime\n=====", &p),
+    // };
+    // // 17 -> 19
+    // let lucas = gen_lucas(20);
+    // for i in 0..100 {
+    //     match is_prime_lucal_lehmer(p.clone(), lucas.clone) {
+    //         true => println!("=====\n{} is Prime\n=====", &p),
+    //         false => println!("=====\n{} is Not Prime\n=====", &p),
+    //     }
+    // }
 
     // Ok(())
 }

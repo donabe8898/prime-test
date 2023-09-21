@@ -26,7 +26,7 @@ pub fn is_prime_lucal_lehmer(c: Integer, lucas: Vec<Integer>) -> bool {
     // 2: s値の列挙
     let mut p = next_pow.clone().find_one(0).unwrap(); // 証明では2^pのp
     let lucasu = lucas;
-    println!("{}", lucasu.len());
+    // println!("{}", lucasu.len());
     if &lucasu[p as usize - 2] % m == Integer::from(0) {
         return true;
     } else {
@@ -58,7 +58,7 @@ pub fn gen_lucas(p: u32) -> Vec<Integer> {
     lucas.push(s.clone());
     loop {
         s = &s * &s - Integer::from(2);
-        println!("{:?}", s);
+        // println!("{:?}", s);
         lucas.push(s.clone());
 
         i += Integer::from(1);

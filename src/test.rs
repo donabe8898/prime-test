@@ -40,7 +40,7 @@ pub fn llr_bench(keta: u32) {
     let mut idx = 0;
     let mut rand = RandState::new();
 
-    let lucas = gen_lucas(keta);
+    let lucas = gen_lucas(23);
     while idx < 100 {
         loop {
             let i = Integer::from(Integer::random_bits(keta.try_into().unwrap(), &mut rand));
@@ -50,6 +50,7 @@ pub fn llr_bench(keta: u32) {
                 continue;
             }
             let _tmp = is_prime_lucal_lehmer(i, lucas.clone());
+            break;
             // print!("{}", is_prime_lucal_lehmer(i.clone()));
         }
         idx += 1;
