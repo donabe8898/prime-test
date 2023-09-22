@@ -86,14 +86,19 @@ pub fn gen_lucas(p: u32) -> Vec<Integer> {
 // }
 
 pub fn pw(a: &Integer, b: &Integer) -> Integer {
-    let mut count: Integer = Integer::from(0);
-    let mut memory: Integer = Integer::from(1);
+    let mut ret: Integer = Integer::from(1);
+    let mut x: Integer = a.clone();
+    let mut n: Integer = b.clone();
     let res = loop {
-        if count == *b {
-            break memory;
+        if n <= Integer::from(0) {
+            break ret;
         }
-        memory *= a;
-        count += Integer::from(1);
+        let p = &n & Integer::from(1);
+        if p == Integer::from(1) {
+            ret *= &x;
+        }
+        x *= x.clone();
+        n >>= 1;
     };
     res
 }
