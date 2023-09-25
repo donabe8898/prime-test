@@ -8,12 +8,12 @@ use super::ll::is_prime_lucal_lehmer;
 use super::mr::is_prime_miller_rabin;
 // use ll::is_prime_lucal_lehmer;
 // use mr::is_prime_miller_rabin;
-use rand::Rng;
+// use rand::Rng;
 use rug::rand::RandState;
-use rug::{Assign, Integer};
+use rug::Integer;
 
 use crate::ll::gen_lucas;
-use crate::test;
+// use crate::test;
 // use yaml::load_yaml;
 // use yaml_rust::{YamlEmitter, YamlLoader};
 

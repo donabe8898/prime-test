@@ -3,6 +3,7 @@ use std::collections::HashSet;
 use rand::Rng;
 use rug::Integer;
 
+#[allow(dead_code)]
 pub fn is_prime_miller_rabin(p: Integer, k: Integer) -> bool {
     let is_prime = |p: Integer, k: Integer| -> bool {
         if (p < Integer::from(2)) || (&p % Integer::from(2) == Integer::from(0)) {

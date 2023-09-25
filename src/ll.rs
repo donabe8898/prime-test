@@ -1,12 +1,14 @@
-use rand::Rng;
+// use rand::Rng;
 use rug::Integer;
 
-use std::collections::btree_set::Intersection;
-use std::collections::HashSet;
-use std::hash::Hash;
+// use std::collections::btree_set::Intersection;
+// use std::collections::HashSet;
+// use std::hash::Hash;
 
 // 1: メルセンヌ数かどうかの判定 t,f
 // 2: sの値の列挙
+
+#[allow(dead_code)]
 pub fn is_prime_lucal_lehmer(c: Integer, lucas: Vec<Integer>) -> bool {
     if &c <= &Integer::from(1) || !(&c.get_bit(0)) {
         return false;
@@ -24,7 +26,7 @@ pub fn is_prime_lucal_lehmer(c: Integer, lucas: Vec<Integer>) -> bool {
     }
 
     // 2: s値の列挙
-    let mut p = next_pow.clone().find_one(0).unwrap(); // 証明では2^pのp
+    let p = next_pow.clone().find_one(0).unwrap(); // 証明では2^pのp
     let lucasu = lucas;
     // println!("{}", lucasu.len());
     if &lucasu[p as usize - 2] % m == Integer::from(0) {
@@ -49,6 +51,7 @@ pub fn is_prime_lucal_lehmer(c: Integer, lucas: Vec<Integer>) -> bool {
     // }
 }
 
+#[allow(dead_code)]
 pub fn gen_lucas(p: u32) -> Vec<Integer> {
     let mut s: Integer = Integer::from(4);
     // let m: Integer = pw(&Integer::from(2), &Integer::from(p)) - Integer::from(1);
@@ -85,6 +88,7 @@ pub fn gen_lucas(p: u32) -> Vec<Integer> {
 //     s == Integer::from(0)
 // }
 
+#[allow(dead_code)]
 pub fn pw(a: &Integer, b: &Integer) -> Integer {
     let mut ret: Integer = Integer::from(1);
     let mut x: Integer = a.clone();

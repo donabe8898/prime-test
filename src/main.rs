@@ -3,14 +3,14 @@ mod mr;
 mod yaml;
 extern crate yaml_rust;
 
-use crate::ll::gen_lucas;
-use ll::is_prime_lucal_lehmer;
-use mr::is_prime_miller_rabin;
-use rand::Rng;
-use rug::rand::RandState;
-use rug::{Assign, Integer};
-use yaml::load_yaml;
-use yaml_rust::{YamlEmitter, YamlLoader};
+// use crate::ll::gen_lucas;
+// use ll::is_prime_lucal_lehmer;
+// use mr::is_prime_miller_rabin;
+// use rand::Rng;
+// use rug::rand::RandState;
+// use rug::{Assign, Integer};
+// use yaml::load_yaml;
+// use yaml_rust::{YamlEmitter, YamlLoader};
 
 /*
     - 素数を100個、素数じゃない奇数を100個用意して、それぞれのアルゴリズムで判定。
@@ -20,6 +20,7 @@ use yaml_rust::{YamlEmitter, YamlLoader};
 
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
+    println!("{:?}", ll::gen_lucas(5));
     // let mut int = Integer::new();
     // let decimal = "524287";
     // int.assign(Integer::parse(decimal).unwrap());
