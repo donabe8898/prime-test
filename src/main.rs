@@ -1,5 +1,6 @@
 mod ll;
 mod mr;
+mod test;
 mod yaml;
 extern crate yaml_rust;
 
@@ -20,7 +21,9 @@ extern crate yaml_rust;
 
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
-    println!("{:?}", ll::gen_lucas(5));
+    println!("{:?}", test::mr_mr_bench(64));
+
+    // println!("{:?}", ll::gen_lucas(5));
     // let mut int = Integer::new();
     // let decimal = "524287";
     // int.assign(Integer::parse(decimal).unwrap());
