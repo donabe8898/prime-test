@@ -21,7 +21,7 @@ extern crate yaml_rust;
 
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
-    println!("{:?}", test::mr_mr_bench(64));
+    // println!("{:?}", test::mr_mr_bench(64));
 
     // println!("{:?}", ll::gen_lucas(5));
     // let mut int = Integer::new();

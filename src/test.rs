@@ -3,7 +3,7 @@
 // pub mod ll;
 // mod mr;
 
-use std::num::NonZeroI128;
+// use std::num::NonZeroI128;
 
 // use crate::ll::gen_prime_num;
 // use super::ll::is_prime_lucal_lehmer;
@@ -12,14 +12,15 @@ use super::mr::is_prime_miller_rabin;
 // use mr::is_prime_miller_rabin;
 // use rand::Rng;
 use rand::Rng;
-use rug::rand::RandState;
-use rug::{Assign, Integer};
+// use rug::rand::RandState;
+use rug::Integer;
 
 // use crate::ll::gen_lucas;
 // use crate::test;
 // use yaml::load_yaml;
 // use yaml_rust::{YamlEmitter, YamlLoader};
 
+#[allow(dead_code)]
 pub fn mr_mr_bench(keta: u64) -> (u64, u64) {
     let mut idx = 0;
     let mut miss_mr_one = 0u64;
@@ -57,6 +58,7 @@ pub fn mr_mr_bench(keta: u64) -> (u64, u64) {
         }
         idx += 1;
     }
+    println!("miss_mr_one: {},miss_mr_two: {}", miss_mr_one, miss_mr_two);
     (miss_mr_one, miss_mr_two)
 }
 
