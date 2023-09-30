@@ -1,3 +1,5 @@
+use rand::Rng;
+use rug::{rand::RandState, Integer};
 mod ll;
 mod mr;
 mod test;
@@ -21,8 +23,11 @@ extern crate yaml_rust;
 
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
-    // println!("{:?}", test::mr_mr_bench(64));
 
+    // let mut rand = RandState::new();
+    // for _ in 0..100 {
+    //     println!("{}", mr::random_num(&mut rand, Integer::from(16)));
+    // }
     // println!("{:?}", ll::gen_lucas(5));
     // let mut int = Integer::new();
     // let decimal = "524287";

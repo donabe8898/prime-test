@@ -22,43 +22,39 @@ use rug::Integer;
 
 #[allow(dead_code)]
 pub fn mr_mr_bench(keta: u64) -> (u64, u64) {
-    let mut idx = 0;
+    // let mut idx = 0;
     let mut miss_mr_one = 0u64;
     let mut miss_mr_two = 0u64;
-    while idx < 100 {
-        loop {
-            let i = random_num(keta);
+    // 100個生成
+    //while idx < 10 {
+    loop {
+        let i = random_num(keta);
 
-            if &i % Integer::from(2) == Integer::from(0) {
-                // 偶数は弾く
-                continue;
-            }
-            // 1回目
-            match is_prime_miller_rabin(i.clone(), Integer::from(6)) {
-                true => {
-                    match is_prime_miller_rabin(
-                        i * Integer::from(2) + Integer::from(1),
-                        Integer::from(6),
-                    ) {
-                        true => {}
-                        false => {
-                            miss_mr_two += 1;
-                            continue;
-                        }
-                    }
-                }
+        if &i % Integer::from(2) == Integer::from(0) {
+            // 偶数は弾く
+            continue;
+        }
+        // 1回目
+        match is_prime_miller_rabin(i.clone(), 6) {
+            true => match is_prime_miller_rabin(i * Integer::from(2) + Integer::from(1), 6) {
+                true => {}
                 false => {
-                    miss_mr_one += 1;
+                    miss_mr_two += 1;
                     continue;
                 }
+            },
+            false => {
+                miss_mr_one += 1;
+                continue;
             }
-            // 上が成功したらbreak
-            break;
-            // print!("{}", is_prime_miller_rabin(i.clone(), Integer::from(4)));
         }
-        idx += 1;
+        // 上が成功したらbreak
+        break;
+        // print!("{}", is_prime_miller_rabin(i.clone(), Integer::from(4)));
     }
-    println!("miss_mr_one: {},miss_mr_two: {}", miss_mr_one, miss_mr_two);
+    // idx += 1;
+    // }
+    println!("miss_mr_one: {}, miss_mr_two: {}", miss_mr_one, miss_mr_two);
     (miss_mr_one, miss_mr_two)
 }
 
