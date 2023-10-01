@@ -8,112 +8,117 @@ running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
-miss_mr_one: 658, miss_mr_two: 7
-miss_mr_one: 9062, miss_mr_two: 94
-miss_mr_one: 11561, miss_mr_two: 130
-miss_mr_one: 8950, miss_mr_two: 98
-miss_mr_one: 16765, miss_mr_two: 174
-miss_mr_one: 8032, miss_mr_two: 100
-miss_mr_one: 3053, miss_mr_two: 23
-miss_mr_one: 352, miss_mr_two: 4
-miss_mr_one: 21130, miss_mr_two: 214
-miss_mr_one: 4358, miss_mr_two: 51
-miss_mr_one: 1145, miss_mr_two: 12
-miss_mr_one: 13920, miss_mr_two: 171
-miss_mr_one: 9766, miss_mr_two: 116
-miss_mr_one: 7927, miss_mr_two: 91
-miss_mr_one: 11997, miss_mr_two: 130
-miss_mr_one: 3993, miss_mr_two: 48
-miss_mr_one: 110, miss_mr_two: 1
-miss_mr_one: 12890, miss_mr_two: 143
-miss_mr_one: 12931, miss_mr_two: 141
-miss_mr_one: 11158, miss_mr_two: 122
-miss_mr_one: 14588, miss_mr_two: 159
-miss_mr_one: 6607, miss_mr_two: 75
-miss_mr_one: 2085, miss_mr_two: 24
-miss_mr_one: 19618, miss_mr_two: 223
-miss_mr_one: 30846, miss_mr_two: 339
-miss_mr_one: 16689, miss_mr_two: 168
-miss_mr_one: 13101, miss_mr_two: 139
-miss_mr_one: 4582, miss_mr_two: 44
-miss_mr_one: 11735, miss_mr_two: 139
-miss_mr_one: 7261, miss_mr_two: 68
-miss_mr_one: 3021, miss_mr_two: 32
-miss_mr_one: 774, miss_mr_two: 14
-miss_mr_one: 3325, miss_mr_two: 37
-miss_mr_one: 8575, miss_mr_two: 101
-miss_mr_one: 26153, miss_mr_two: 284
-miss_mr_one: 1967, miss_mr_two: 30
-miss_mr_one: 25851, miss_mr_two: 279
-miss_mr_one: 8872, miss_mr_two: 117
-miss_mr_one: 2714, miss_mr_two: 30
-miss_mr_one: 18753, miss_mr_two: 197
-miss_mr_one: 1049, miss_mr_two: 10
-miss_mr_one: 17481, miss_mr_two: 183
-miss_mr_one: 10867, miss_mr_two: 109
-miss_mr_one: 10968, miss_mr_two: 107
-miss_mr_one: 15698, miss_mr_two: 205
-miss_mr_one: 2639, miss_mr_two: 23
-miss_mr_one: 229, miss_mr_two: 3
-miss_mr_one: 7618, miss_mr_two: 101
-miss_mr_one: 3853, miss_mr_two: 43
-miss_mr_one: 2821, miss_mr_two: 33
-miss_mr_one: 44651, miss_mr_two: 520
-miss_mr_one: 851, miss_mr_two: 10
-miss_mr_one: 596, miss_mr_two: 1
-miss_mr_one: 760, miss_mr_two: 12
-miss_mr_one: 55429, miss_mr_two: 626
-miss_mr_one: 5118, miss_mr_two: 55
-miss_mr_one: 9536, miss_mr_two: 113
-miss_mr_one: 8638, miss_mr_two: 95
-miss_mr_one: 282, miss_mr_two: 1
-miss_mr_one: 14382, miss_mr_two: 171
-miss_mr_one: 18499, miss_mr_two: 208
-miss_mr_one: 926, miss_mr_two: 10
-miss_mr_one: 4538, miss_mr_two: 57
-miss_mr_one: 26891, miss_mr_two: 285
-miss_mr_one: 1227, miss_mr_two: 16
-miss_mr_one: 1544, miss_mr_two: 14
-miss_mr_one: 7485, miss_mr_two: 96
-miss_mr_one: 8239, miss_mr_two: 98
-miss_mr_one: 25373, miss_mr_two: 315
-miss_mr_one: 2319, miss_mr_two: 21
-miss_mr_one: 32628, miss_mr_two: 369
-miss_mr_one: 25745, miss_mr_two: 288
-miss_mr_one: 18245, miss_mr_two: 208
-miss_mr_one: 3771, miss_mr_two: 39
-miss_mr_one: 1535, miss_mr_two: 14
-miss_mr_one: 7251, miss_mr_two: 81
-miss_mr_one: 43916, miss_mr_two: 495
-miss_mr_one: 48697, miss_mr_two: 517
-miss_mr_one: 6660, miss_mr_two: 80
-miss_mr_one: 4127, miss_mr_two: 43
-miss_mr_one: 1884, miss_mr_two: 19
-miss_mr_one: 17188, miss_mr_two: 217
-miss_mr_one: 27850, miss_mr_two: 310
-miss_mr_one: 29095, miss_mr_two: 337
-miss_mr_one: 5388, miss_mr_two: 70
-miss_mr_one: 11308, miss_mr_two: 118
-miss_mr_one: 4182, miss_mr_two: 48
-miss_mr_one: 1527, miss_mr_two: 13
-miss_mr_one: 36185, miss_mr_two: 390
-miss_mr_one: 13512, miss_mr_two: 133
-miss_mr_one: 11749, miss_mr_two: 116
-miss_mr_one: 26839, miss_mr_two: 306
-miss_mr_one: 10766, miss_mr_two: 108
-miss_mr_one: 13926, miss_mr_two: 169
-miss_mr_one: 44098, miss_mr_two: 506
-miss_mr_one: 22810, miss_mr_two: 248
-miss_mr_one: 3625, miss_mr_two: 45
-miss_mr_one: 4966, miss_mr_two: 43
-miss_mr_one: 9719, miss_mr_two: 103
-miss_mr_one: 8878, miss_mr_two: 109
-miss_mr_one: 4399, miss_mr_two: 52
-miss_mr_one: 24201, miss_mr_two: 294
-miss_mr_one: 29931, miss_mr_two: 326
-mr+mr                   time:   [2.1660 s 2.6447 s 3.1564 s]
-                        change: [+685.53% +947.26% +1282.0%] (p = 0.00 < 0.05)
+88, 2
+4146, 46
+8489, 98
+26836, 316
+4885, 66
+43737, 526
+27549, 322
+11620, 137
+988, 8
+32608, 351
+1287, 9
+8785, 88
+5524, 52
+1144, 14
+9544, 127
+3708, 50
+73, 1
+18316, 217
+13923, 142
+9112, 98
+32213, 336
+793, 11
+2526, 26
+12615, 136
+6760, 65
+14006, 157
+1321, 9
+16340, 197
+5436, 49
+5307, 49
+3205, 43
+10606, 113
+2768, 34
+13219, 152
+1554, 14
+4793, 56
+7593, 98
+9307, 95
+1096, 10
+27546, 325
+19064, 211
+11390, 130
+11965, 140
+41256, 491
+11172, 119
+15261, 162
+22385, 248
+17512, 181
+7705, 75
+20851, 241
+271, 3
+5403, 64
+828, 11
+8536, 94
+30194, 329
+11171, 130
+11033, 124
+21243, 198
+3422, 38
+8280, 97
+9593, 99
+3571, 45
+53420, 566
+1416, 14
+9420, 114
+1048, 11
+663, 1
+1046, 10
+1005, 6
+8185, 87
+1316, 12
+36643, 400
+10293, 112
+1435, 13
+354, 4
+3114, 35
+4409, 34
+6751, 97
+18758, 208
+5348, 57
+9156, 119
+2499, 30
+5320, 60
+1508, 13
+32067, 369
+3255, 53
+975, 12
+576, 6
+20613, 179
+1164, 17
+13002, 138
+9716, 106
+10409, 123
+13462, 155
+15394, 158
+11011, 124
+13145, 150
+21578, 246
+5369, 63
+15336, 168
+15022, 176
+3496, 42
+10116, 120
+6932, 66
+312, 4
+106, 0
+1303, 17
+mr+mr                   time:   [1.7658 s 2.1659 s 2.6056 s]
+                        change: [+527.10% +721.63% +980.83%] (p = 0.00 < 0.05)
                         Performance has regressed.
-Found 5 outliers among 100 measurements (5.00%)
-  5 (5.00%) high mild
+Found 7 outliers among 100 measurements (7.00%)
+  6 (6.00%) high mild
+  1 (1.00%) high severe
 

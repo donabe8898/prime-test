@@ -35,8 +35,8 @@ pub fn mr_mr_bench(keta: u64) -> (u64, u64) {
             continue;
         }
         // 1回目
-        match is_prime_miller_rabin(i.clone(), 6) {
-            true => match is_prime_miller_rabin(i * Integer::from(2) + Integer::from(1), 6) {
+        match is_prime_miller_rabin(i.clone(), 12) {
+            true => match is_prime_miller_rabin(i * Integer::from(2) + Integer::from(1), 12) {
                 true => {}
                 false => {
                     miss_mr_two += 1;
@@ -54,7 +54,7 @@ pub fn mr_mr_bench(keta: u64) -> (u64, u64) {
     }
     // idx += 1;
     // }
-    println!("miss_mr_one: {}, miss_mr_two: {}", miss_mr_one, miss_mr_two);
+    println!("{}, {}", miss_mr_one, miss_mr_two);
     (miss_mr_one, miss_mr_two)
 }
 
