@@ -58,6 +58,32 @@ pub fn mr_mr_bench(keta: u64) -> (u64, u64) {
     (miss_mr_one, miss_mr_two)
 }
 
+pub fn mr_bench(keta: u64) -> u64 {
+    let mut miss_mr = 0u64;
+    loop {
+        let i = random_num(keta);
+
+        if &i % Integer::from(2) == Integer::from(0) {
+            // 偶数は弾く
+            continue;
+        }
+        // 1回目
+        match is_prime_miller_rabin(i.clone(), 12) {
+            true => {
+                break;
+            }
+            false => {
+                miss_mr += 1;
+                continue;
+            }
+        };
+        // 上が成功したらbreak
+        // print!("{}", is_prime_miller_rabin(i.clone(), Integer::from(4)));
+    }
+    println!("{}", miss_mr);
+    miss_mr
+}
+
 pub fn random_num(bit: u64) -> Integer {
     let mut str_res: String = String::new();
     // 初期状態で最大bitを1にする
