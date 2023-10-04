@@ -1,6 +1,8 @@
 // use rand::Rng;
 // use rug::{rand::RandState, Integer};
+mod euler;
 mod ll;
+mod math;
 mod mr;
 mod test;
 mod yaml;
@@ -9,6 +11,8 @@ extern crate yaml_rust;
 // use crate::ll::gen_lucas;
 // use ll::is_prime_lucal_lehmer;
 // use mr::is_prime_miller_rabin;
+use euler::is_prime_euler_lagrange;
+use rug::Integer;
 // use rand::Rng;
 // use rug::rand::RandState;
 // use rug::{Assign, Integer};
@@ -23,7 +27,11 @@ extern crate yaml_rust;
 
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
+    for _ in 0..20 {
+        println!("{:?}", test::mr_eel_bench(64));
+    }
 
+    // let m = 2;
     // let mut rand = RandState::new();
     // for _ in 0..100 {
     //     println!("{}", mr::random_num(&mut rand, Integer::from(16)));

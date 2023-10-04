@@ -5,6 +5,8 @@
 
 // use std::num::NonZeroI128;
 
+use super::euler::is_prime_euler_lagrange;
+
 // use crate::ll::gen_prime_num;
 // use super::ll::is_prime_lucal_lehmer;
 use super::mr::is_prime_miller_rabin;
@@ -35,7 +37,7 @@ pub fn mr_mr_bench(keta: u64) -> (u64, u64) {
             continue;
         }
         // 1回目
-        match is_prime_miller_rabin(i.clone(), 12) {
+        match is_prime_miller_rabin(i.clone(), 6) {
             true => match is_prime_miller_rabin(i * Integer::from(2) + Integer::from(1), 12) {
                 true => {}
                 false => {
@@ -58,6 +60,41 @@ pub fn mr_mr_bench(keta: u64) -> (u64, u64) {
     (miss_mr_one, miss_mr_two)
 }
 
+#[allow(dead_code)]
+pub fn mr_eel_bench(keta: u64) -> (u64, u64) {
+    let mut miss_mr = 0u64;
+    let mut miss_eel = 0u64;
+    loop {
+        let i = random_num(keta);
+
+        if &i % Integer::from(2) == Integer::from(0) {
+            // 偶数は弾く
+            continue;
+        }
+        // 1回目
+        println!("{}", i);
+        match is_prime_miller_rabin(i.clone(), 6) {
+            true => match is_prime_euler_lagrange(i * Integer::from(2) + Integer::from(1)) {
+                true => break,
+                false => {
+                    miss_mr += 1;
+                    continue;
+                }
+            },
+            false => {
+                miss_eel += 1;
+                continue;
+            }
+        }
+        // 上が成功したらbreak
+        // print!("{}", is_prime_miller_rabin(i.clone(), Integer::from(4)));
+    }
+
+    println!("{},{}", miss_mr, miss_eel);
+    (miss_mr, miss_eel)
+}
+
+#[allow(dead_code)]
 pub fn mr_bench(keta: u64) -> u64 {
     let mut miss_mr = 0u64;
     loop {

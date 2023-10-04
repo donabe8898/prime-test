@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "type": "cargo",
+            "name": "cargo run",
+            "cargoArgs": ["run","--release"]
+        },
+        {
+            "type": "cargo",
+            "name":"cargo bench",
+            "cargoArgs": ["bench"],
+        }
+        
+    ]
+}
