@@ -7,8 +7,10 @@ use super::math::pw;
 pub fn is_prime_euler_lagrange(q: Integer) -> bool {
     let p: Integer = (&q - Integer::from(1)) / Integer::from(2);
     if &p % Integer::from(4) == Integer::from(1) {
-        ((pw(&Integer::from(2), &p) + Integer::from(1)) % &q) == Integer::from(0)
+        println!("1");
+        ((pw(&Integer::from(2), &p) + Integer::from(1)) % q) == Integer::from(0)
     } else {
-        ((pw(&Integer::from(2), &p) - Integer::from(1)) % &q) == Integer::from(0)
+        println!("2");
+        ((pw(&Integer::from(2), &p) - Integer::from(1)) % q) == Integer::from(0)
     }
 }

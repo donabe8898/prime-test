@@ -3,6 +3,11 @@ name = "prime-test"
 version = "0.1.0"
 edition = "2021"
 
+# mold linker
+[target.ARCHITECTURE]
+linker = "clang"
+rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

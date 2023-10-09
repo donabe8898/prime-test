@@ -8,16 +8,14 @@ mod test;
 mod yaml;
 extern crate yaml_rust;
 
-// use crate::ll::gen_lucas;
-// use ll::is_prime_lucal_lehmer;
-// use mr::is_prime_miller_rabin;
 use euler::is_prime_euler_lagrange;
+use mr::is_prime_miller_rabin;
+use rand::Rng;
+use rug::rand::RandState;
+use rug::Assign;
 use rug::Integer;
-// use rand::Rng;
-// use rug::rand::RandState;
-// use rug::{Assign, Integer};
-// use yaml::load_yaml;
-// use yaml_rust::{YamlEmitter, YamlLoader};
+use yaml::load_yaml;
+use yaml_rust::{YamlEmitter, YamlLoader};
 
 /*
     - 素数を100個、素数じゃない奇数を100個用意して、それぞれのアルゴリズムで判定。
@@ -27,9 +25,9 @@ use rug::Integer;
 
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
-    for _ in 0..20 {
-        println!("{:?}", test::mr_eel_bench(64));
-    }
+    // for _ in 0..20 {
+    //     println!("{:?}", test::mr_eel_bench(64));
+    // }
 
     // let m = 2;
     // let mut rand = RandState::new();
@@ -37,12 +35,13 @@ fn main() /*-> Result<(), Box<dyn std::error::Error>> */
     //     println!("{}", mr::random_num(&mut rand, Integer::from(16)));
     // }
     // println!("{:?}", ll::gen_lucas(5));
-    // let mut int = Integer::new();
-    // let decimal = "524287";
-    // int.assign(Integer::parse(decimal).unwrap());
 
-    // let p = Integer::from(int);
-    // let k = Integer::from(4);
+    let mut int = Integer::new();
+    let decimal = "1471311131";
+    int.assign(Integer::parse(decimal).unwrap());
+
+    let p = Integer::from(int);
+    println!("{}", euler::is_prime_euler_lagrange(p));
 
     // // TODO: 本番
     // let path = "./test_num.yaml";
