@@ -8,11 +8,11 @@ use rug::Integer;
 pub fn is_prime_miller_rabin(p: Integer, k: u64) -> bool {
     let mut rand = RandState::new();
     let is_prime = |p: &Integer, k: Integer| -> bool {
-        if (p < &Integer::from(2)) || (p % Integer::from(2) == Integer::from(0)) {
-            return false;
+        if p <= &Integer::from(2) {
+            return p == &Integer::from(2);
         }
-        if *p <= Integer::from(3) {
-            return true;
+        if p % Integer::from(2) == Integer::from(0) {
+            return false;
         }
 
         let q: Integer = p - Integer::from(1);

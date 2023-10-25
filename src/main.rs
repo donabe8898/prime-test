@@ -6,22 +6,36 @@ mod math;
 mod mr;
 mod test;
 mod yaml;
-extern crate yaml_rust;
+// extern crate yaml_rust;
 
 use euler::is_prime_euler_lagrange;
+// use euler::is_prime_euler_lagrange2;
 use mr::is_prime_miller_rabin;
+// use mylib::math::pw;
 use rand::Rng;
 use rug::rand::RandState;
 use rug::Assign;
 use rug::Integer;
-use yaml::load_yaml;
-use yaml_rust::{YamlEmitter, YamlLoader};
+// use yaml::load_yaml;
+// use yaml_rust::{YamlEmitter, YamlLoader};
 
 /*
     - 素数を100個、素数じゃない奇数を100個用意して、それぞれのアルゴリズムで判定。
     - 判定にかかった時間と正解率のコスパが良いものはどれか
     - 1024〜4096 bit
 */
+
+/* アノテーションこめんど
+TODO: 	あとで追加、修正するべき機能がある。
+FIXME: 	既知の不具合があるコード。修正が必要。
+HACK: 	あまりきれいじゃないコード。リファクタリングが必要。
+XXX: 	危険！動くけどなぜうごくかわからない。
+REVIEW: 	意図した通りに動くか、見直す必要がある。
+OPTIMIZE: 	無駄が多く、ボトルネックになっている。
+CHANGED: 	コードをどのように変更したか。
+NOTE: 	なぜ、こうなったという情報を残す。
+WARNING: 	注意が必要。
+ */
 
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
@@ -37,11 +51,25 @@ fn main() /*-> Result<(), Box<dyn std::error::Error>> */
     // println!("{:?}", ll::gen_lucas(5));
 
     let mut int = Integer::new();
-    let decimal = "1471311131";
+    let decimal = "13331";
     int.assign(Integer::parse(decimal).unwrap());
 
+    let primes: [u32; 20] = [
+        3259, 3271, 3299, 3301, 3307, 3313, 3319, 3323, 3329, 3331, 3343, 3347, 3359, 3361, 3371,
+        3373, 3389, 3391, 3407, 3413,
+    ];
+
     let p = Integer::from(int);
-    println!("{}", euler::is_prime_euler_lagrange(p));
+    // println!("{}", euler::is_prime_euler_lagrange(p));
+    // let pp = (&p - Integer::from(1)) / Integer::from(2);
+
+    // println!(
+    //     "{},{}",
+    //     is_prime_miller_rabin(p.clone(), 12),
+    //     is_prime_euler_lagrange(p.clone())
+    // );
+
+    // println!("{}", Integer::from(2).pow_mod(&pp, &p).unwrap());
 
     // // TODO: 本番
     // let path = "./test_num.yaml";
@@ -49,7 +77,6 @@ fn main() /*-> Result<(), Box<dyn std::error::Error>> */
     // let doc = &docs[0];
 
     // // TODO: miller-rabinテストの実行時間計測
-
     // // TODO: リュカ-レーマ-テストの実行時間計測
 
     // // HACK: yamlのテストコード
@@ -83,10 +110,26 @@ fn main() /*-> Result<(), Box<dyn std::error::Error>> */
     // }
     // HACK: 判定テスト用
 
-    // match is_prime_miller_rabin(p.clone(), k.clone()) {
-    //     true => println!("=====\n{} is Prime\n=====", &p),
-    //     false => println!("=====\n{} is Not Prime\n=====", &p),
-    // };
+    // for i in (2..55500).step_by(2) {
+    //     let p = &p + Integer::from(i);
+
+    //     if is_prime_euler_lagrange(p.clone()) != is_prime_euler_lagrange2(p.clone()) {
+    //         println!("{}", p);
+    //     }
+
+    //     match is_prime_miller_rabin(Integer::from(p), 6) {
+    //         true => println!("=====\n{} is Prime (MR)\n=====", &p),
+    //         false => println!("=====\n{} is Not Prime (MR)\n=====", &p),
+    //     };
+    //     match is_prime_euler_lagrange(Integer::from(p.clone())) {
+    //         true => println!("=====\n{} is Prime\n=====", &p),
+    //         false => println!("=====\n{} is Not Prime\n=====", &p),
+    //     }
+    //     match is_prime_euler_lagrange2(Integer::from(p.clone())) {
+    //         true => println!("=====\n{} is Prime (2)\n=====", &p),
+    //         false => println!("=====\n{} is Not Prime (2)\n=====", &p),
+    //     }
+    // }
     // // 17 -> 19
     // let lucas = gen_lucas(20);
     // for i in 0..100 {

@@ -15,7 +15,7 @@ rustflags = ["-C", "link-arg=-fuse-ld=mold"]
 proconio = "0.4.3"
 rug = "1.22.0"
 rand = "0.6"
-yaml-rust = "0.4"
+# yaml-rust = "0.4"
 
 [dev-dependencies]
 criterion = { version = "0.4", features = ["html_reports"] }
