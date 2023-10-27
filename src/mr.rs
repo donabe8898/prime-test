@@ -11,6 +11,9 @@ pub fn is_prime_miller_rabin(p: Integer, k: u64) -> bool {
         if p <= &Integer::from(2) {
             return p == &Integer::from(2);
         }
+        if p == &Integer::from(5) {
+            return true;
+        }
         if p % Integer::from(2) == Integer::from(0) {
             return false;
         }

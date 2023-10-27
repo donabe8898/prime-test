@@ -72,7 +72,6 @@ pub fn mr_eel_bench(keta: u64) -> (u64, u64) {
             continue;
         }
         // 1回目
-        println!("{}", i);
         match is_prime_miller_rabin(i.clone(), 6) {
             true => match is_prime_euler_lagrange(i * Integer::from(2) + Integer::from(1)) {
                 true => break,

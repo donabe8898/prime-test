@@ -16,6 +16,10 @@ use rand::Rng;
 use rug::rand::RandState;
 use rug::Assign;
 use rug::Integer;
+use std::time;
+use std::time::Instant;
+use test::mr_eel_bench;
+use test::mr_mr_bench;
 // use yaml::load_yaml;
 // use yaml_rust::{YamlEmitter, YamlLoader};
 
@@ -39,6 +43,24 @@ WARNING: 	注意が必要。
 
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
+    /*　100個生成テスト用 */
+    let mut mr_mr_miss: [(u64, u64); 100] = [(0, 0); 100];
+    let mut mr_eel_miss: [(u64, u64); 100] = [(0, 0); 100];
+    // mr_mr 計測開始
+    let now: time::Instant = time::Instant::now();
+    for i in 0..100 {
+        mr_mr_miss[i] = mr_mr_bench(64);
+    }
+    let end = now.elapsed();
+    println!("time: {:?}\n{:?}", end, mr_mr_miss);
+
+    // mr_eel 計測開始
+    let now = time::Instant::now();
+    for i in 0..100 {
+        mr_eel_miss[i] = mr_eel_bench(64);
+    }
+    let end = now.elapsed();
+    println!("time: {:?}\n{:?}", end, mr_eel_miss);
     // for _ in 0..20 {
     //     println!("{:?}", test::mr_eel_bench(64));
     // }
@@ -50,16 +72,16 @@ fn main() /*-> Result<(), Box<dyn std::error::Error>> */
     // }
     // println!("{:?}", ll::gen_lucas(5));
 
-    let mut int = Integer::new();
-    let decimal = "13331";
-    int.assign(Integer::parse(decimal).unwrap());
+    // let mut int = Integer::new();
+    // let decimal = "13331";
+    // int.assign(Integer::parse(decimal).unwrap());
 
-    let primes: [u32; 20] = [
-        3259, 3271, 3299, 3301, 3307, 3313, 3319, 3323, 3329, 3331, 3343, 3347, 3359, 3361, 3371,
-        3373, 3389, 3391, 3407, 3413,
-    ];
+    // let primes: [u32; 20] = [
+    //     3259, 3271, 3299, 3301, 3307, 3313, 3319, 3323, 3329, 3331, 3343, 3347, 3359, 3361, 3371,
+    //     3373, 3389, 3391, 3407, 3413,
+    // ];
 
-    let p = Integer::from(int);
+    // let p = Integer::from(int);
     // println!("{}", euler::is_prime_euler_lagrange(p));
     // let pp = (&p - Integer::from(1)) / Integer::from(2);
 
