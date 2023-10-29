@@ -20,11 +20,11 @@ rand = "0.6"
 [dev-dependencies]
 criterion = { version = "0.4", features = ["html_reports"] }
 
-[[bench]]
-name = "benchmark"
-# なんかフルパスじゃないと動かない
-path = "/home/yugo/git/prime-test/src/benches/benchmark.rs"
-harness = false
+# [[bench]]
+# name = "benchmark"
+# # なんかフルパスじゃないと動かない
+# path = "/home/yugo/git/prime-test/src/benches/benchmark.rs"
+# harness = false
 
 [lib]
 name = "mylib"

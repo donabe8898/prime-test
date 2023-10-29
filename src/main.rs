@@ -43,28 +43,120 @@ WARNING: 	注意が必要。
 
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
-    /*　100個生成テスト用 */
-    let mut mr_mr_miss: [(u64, u64); 100] = [(0, 0); 100];
-    let mut mr_eel_miss: [(u64, u64); 100] = [(0, 0); 100];
-    // mr_mr 計測開始
-    let now: time::Instant = time::Instant::now();
-    for i in 0..100 {
-        mr_mr_miss[i] = mr_mr_bench(64);
-    }
-    let end = now.elapsed();
-    println!("time: {:?}\n{:?}", end, mr_mr_miss);
+    /*　生成個数 */
+    let piece = 1000;
 
-    // mr_eel 計測開始
-    let now = time::Instant::now();
-    for i in 0..100 {
-        mr_eel_miss[i] = mr_eel_bench(64);
-    }
-    let end = now.elapsed();
-    println!("time: {:?}\n{:?}", end, mr_eel_miss);
-    // for _ in 0..20 {
-    //     println!("{:?}", test::mr_eel_bench(64));
-    // }
+    /* 計測用整数生成
+    zeroとtmpはシャドーイング
+     */
+    // 1024 bit
+    let zero = Integer::from(0);
+    let mut tmp = vec![zero; piece];
+    let test1024 = {
+        let mut cnt = 0;
+        while cnt < piece {
+            let r = test::random_num(1024);
 
+            if &r % Integer::from(2) == Integer::from(0) {
+                continue;
+            }
+            tmp[cnt] = r;
+            cnt += 1;
+        }
+        tmp
+    };
+    // 2048 bit
+    let zero = Integer::from(0);
+    let mut tmp = vec![zero; piece];
+
+    let test2048 = {
+        let mut cnt = 0;
+        while cnt < piece {
+            let r = test::random_num(2048);
+            if &r % Integer::from(2) == Integer::from(0) {
+                continue;
+            }
+            tmp[cnt] = r;
+            cnt += 1;
+        }
+        tmp
+    };
+    // 4096 bit
+    let zero = Integer::from(0);
+    let mut tmp = vec![zero; piece];
+    let test4096 = {
+        let mut cnt = 0;
+        while cnt < piece {
+            let r = test::random_num(4096);
+            if &r % Integer::from(2) == Integer::from(0) {
+                continue;
+            }
+            tmp[cnt] = r;
+            cnt += 1;
+        }
+        tmp
+    };
+
+    /* TODO: MR_MR計測 */
+    for tests in [&test1024, &test2048, &test4096] {
+        let now: time::Instant = time::Instant::now();
+        let mut mr_mr_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
+        for test in tests {
+            match test::mr_mr_bench(test.clone()) {
+                (false, false) => mr_mr_miss.2 += 1,
+                (true, false) => mr_mr_miss.0 += 1,
+                (false, true) => mr_mr_miss.1 += 1,
+                (_, _) => {}
+            }
+        }
+        let end = now.elapsed();
+        println!("MRMR {:?}\n{:?}", end, mr_mr_miss);
+    }
+    /* TODO: MR_EEL計測 */
+    for tests in [&test1024, &test2048, &test4096] {
+        let now: time::Instant = time::Instant::now();
+        let mut mr_eel_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
+        for test in tests {
+            match test::mr_eel_bench(test.clone()) {
+                (false, false) => mr_eel_miss.2 += 1,
+                (true, false) => mr_eel_miss.0 += 1,
+                (false, true) => mr_eel_miss.1 += 1,
+                (_, _) => {}
+            }
+        }
+        let end = now.elapsed();
+        println!("MREEL {:?}\n{:?}", end, mr_eel_miss);
+    }
+    /* TODO: EEL_MR計測 */
+    for tests in [&test1024, &test2048, &test4096] {
+        let now: time::Instant = time::Instant::now();
+        let mut mr_eel_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
+        for test in tests {
+            match test::eel_mr_bench(test.clone()) {
+                (false, false) => mr_eel_miss.2 += 1,
+                (true, false) => mr_eel_miss.0 += 1,
+                (false, true) => mr_eel_miss.1 += 1,
+                (_, _) => {}
+            }
+        }
+        let end = now.elapsed();
+        println!("EEL+MR {:?}\n{:?}", end, mr_eel_miss);
+    }
+    /* TODO: EEL_EEL計測 */
+    for tests in [&test1024, &test2048, &test4096] {
+        let now: time::Instant = time::Instant::now();
+        let mut mr_eel_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
+        for test in tests {
+            match test::eel_eel_bench(test.clone()) {
+                (false, false) => mr_eel_miss.2 += 1,
+                (true, false) => mr_eel_miss.0 += 1,
+                (false, true) => mr_eel_miss.1 += 1,
+                (_, _) => {}
+            }
+        }
+        let end = now.elapsed();
+        println!("EEL+EEL {:?}\n{:?}", end, mr_eel_miss);
+    }
     // let m = 2;
     // let mut rand = RandState::new();
     // for _ in 0..100 {

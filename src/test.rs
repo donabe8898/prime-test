@@ -22,75 +22,58 @@ use rug::Integer;
 // use yaml::load_yaml;
 // use yaml_rust::{YamlEmitter, YamlLoader};
 
+/*  MR+MR */
 #[allow(dead_code)]
-pub fn mr_mr_bench(keta: u64) -> (u64, u64) {
-    // let mut idx = 0;
-    let mut miss_mr_one = 0u64;
-    let mut miss_mr_two = 0u64;
-    // 100個生成
-    //while idx < 10 {
-    loop {
-        let i = random_num(keta);
-
-        if &i % Integer::from(2) == Integer::from(0) {
-            // 偶数は弾く
-            continue;
-        }
-        // 1回目
-        match is_prime_miller_rabin(i.clone(), 6) {
-            true => match is_prime_miller_rabin(i * Integer::from(2) + Integer::from(1), 12) {
-                true => {}
-                false => {
-                    miss_mr_two += 1;
-                    continue;
-                }
-            },
-            false => {
-                miss_mr_one += 1;
-                continue;
+pub fn mr_mr_bench(test_num: Integer) -> (bool, bool) {
+    match is_prime_miller_rabin(test_num.clone(), 6) {
+        true => {
+            match is_prime_miller_rabin(test_num.clone() * Integer::from(2) + Integer::from(1), 6) {
+                true => return (false, false),
+                false => return (false, true),
             }
         }
-        // 上が成功したらbreak
-        break;
-        // print!("{}", is_prime_miller_rabin(i.clone(), Integer::from(4)));
+        false => return (true, false),
     }
-    // idx += 1;
-    // }
-    println!("{}, {}", miss_mr_one, miss_mr_two);
-    (miss_mr_one, miss_mr_two)
 }
 
+/* MR+EEL */
 #[allow(dead_code)]
-pub fn mr_eel_bench(keta: u64) -> (u64, u64) {
-    let mut miss_mr = 0u64;
-    let mut miss_eel = 0u64;
-    loop {
-        let i = random_num(keta);
-
-        if &i % Integer::from(2) == Integer::from(0) {
-            // 偶数は弾く
-            continue;
-        }
-        // 1回目
-        match is_prime_miller_rabin(i.clone(), 6) {
-            true => match is_prime_euler_lagrange(i * Integer::from(2) + Integer::from(1)) {
-                true => break,
-                false => {
-                    miss_mr += 1;
-                    continue;
-                }
-            },
-            false => {
-                miss_eel += 1;
-                continue;
+pub fn mr_eel_bench(test_num: Integer) -> (bool, bool) {
+    match is_prime_miller_rabin(test_num.clone(), 6) {
+        true => {
+            match is_prime_euler_lagrange(test_num.clone() * Integer::from(2) + Integer::from(1)) {
+                true => return (false, false),
+                false => return (false, true),
             }
         }
-        // 上が成功したらbreak
-        // print!("{}", is_prime_miller_rabin(i.clone(), Integer::from(4)));
+        false => return (true, false),
     }
-
-    println!("{},{}", miss_mr, miss_eel);
-    (miss_mr, miss_eel)
+}
+/* EEL+MR */
+#[allow(dead_code)]
+pub fn eel_mr_bench(test_num: Integer) -> (bool, bool) {
+    match is_prime_euler_lagrange(test_num.clone()) {
+        true => {
+            match is_prime_miller_rabin(test_num.clone() * Integer::from(2) + Integer::from(1), 6) {
+                true => return (false, false),
+                false => return (false, true),
+            }
+        }
+        false => return (true, false),
+    }
+}
+/* EEL+EEL */
+#[allow(dead_code)]
+pub fn eel_eel_bench(test_num: Integer) -> (bool, bool) {
+    match is_prime_euler_lagrange(test_num.clone()) {
+        true => {
+            match is_prime_euler_lagrange(test_num.clone() * Integer::from(2) + Integer::from(1)) {
+                true => return (false, false),
+                false => return (false, true),
+            }
+        }
+        false => return (true, false),
+    }
 }
 
 #[allow(dead_code)]
