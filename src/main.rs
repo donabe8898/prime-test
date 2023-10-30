@@ -9,6 +9,7 @@ mod yaml;
 // extern crate yaml_rust;
 
 use euler::is_prime_euler_lagrange;
+use euler::is_prime_euler_lagrange_old;
 // use euler::is_prime_euler_lagrange2;
 use mr::is_prime_miller_rabin;
 // use mylib::math::pw;
@@ -44,7 +45,7 @@ WARNING: 	注意が必要。
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
     /*　生成個数 */
-    let piece = 1000;
+    let piece = 10000;
 
     /* 計測用整数生成
     zeroとtmpはシャドーイング
