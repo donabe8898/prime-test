@@ -30,7 +30,7 @@ use test::mr_mr_bench;
     - 1024〜4096 bit
 */
 
-/* アノテーションこめんど
+/* アノテーションこめんと
 TODO: 	あとで追加、修正するべき機能がある。
 FIXME: 	既知の不具合があるコード。修正が必要。
 HACK: 	あまりきれいじゃないコード。リファクタリングが必要。
@@ -45,7 +45,14 @@ WARNING: 	注意が必要。
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
     /*　生成個数 */
-    let piece = 10000;
+    let piece = 1000;
+    let primes = [
+        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89,
+        97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181,
+        191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281,
+        283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397,
+        401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503,
+    ];
 
     /* 計測用整数生成
     zeroとtmpはシャドーイング
@@ -55,48 +62,65 @@ fn main() /*-> Result<(), Box<dyn std::error::Error>> */
     let mut tmp = vec![zero; piece];
     let test1024 = {
         let mut cnt = 0;
-        while cnt < piece {
+        'outer: while cnt < piece {
             let r = test::random_num(1024);
 
-            if &r % Integer::from(2) == Integer::from(0) {
-                continue;
+            for i in primes {
+                if &r % Integer::from(i) == Integer::from(0) {
+                    continue 'outer;
+                }
             }
+
             tmp[cnt] = r;
             cnt += 1;
         }
         tmp
     };
+    println!("Ok"); // HACK: debug
+
     // 2048 bit
     let zero = Integer::from(0);
     let mut tmp = vec![zero; piece];
 
     let test2048 = {
         let mut cnt = 0;
-        while cnt < piece {
+        'outer: while cnt < piece {
             let r = test::random_num(2048);
-            if &r % Integer::from(2) == Integer::from(0) {
-                continue;
+
+            for i in primes {
+                if &r % Integer::from(i) == Integer::from(0) {
+                    continue 'outer;
+                }
             }
+
             tmp[cnt] = r;
             cnt += 1;
         }
         tmp
     };
+
+    println!("Ok"); // HACK: debug
+
     // 4096 bit
     let zero = Integer::from(0);
     let mut tmp = vec![zero; piece];
     let test4096 = {
         let mut cnt = 0;
-        while cnt < piece {
+        'outer: while cnt < piece {
             let r = test::random_num(4096);
-            if &r % Integer::from(2) == Integer::from(0) {
-                continue;
+
+            for i in primes {
+                if &r % Integer::from(i) == Integer::from(0) {
+                    continue 'outer;
+                }
             }
             tmp[cnt] = r;
             cnt += 1;
         }
         tmp
     };
+
+    println!("Ok"); // HACK: debug
 
     /* TODO: MR_MR計測 */
     for tests in [&test1024, &test2048, &test4096] {
