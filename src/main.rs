@@ -1,28 +1,10 @@
-// use rand::Rng;
-// use rug::{rand::RandState, Integer};
 mod euler;
 mod ll;
-mod math;
 mod mr;
 mod test;
-mod yaml;
-// extern crate yaml_rust;
 
-use euler::is_prime_euler_lagrange;
-use euler::is_prime_euler_lagrange_old;
-// use euler::is_prime_euler_lagrange2;
-use mr::is_prime_miller_rabin;
-// use mylib::math::pw;
-use rand::Rng;
-use rug::rand::RandState;
-use rug::Assign;
 use rug::Integer;
 use std::time;
-use std::time::Instant;
-use test::mr_eel_bench;
-use test::mr_mr_bench;
-// use yaml::load_yaml;
-// use yaml_rust::{YamlEmitter, YamlLoader};
 
 /*
     - 素数を100個、素数じゃない奇数を100個用意して、それぞれのアルゴリズムで判定。
@@ -31,6 +13,7 @@ use test::mr_mr_bench;
 */
 
 /* アノテーションこめんと
+
 TODO: 	あとで追加、修正するべき機能がある。
 FIXME: 	既知の不具合があるコード。修正が必要。
 HACK: 	あまりきれいじゃないコード。リファクタリングが必要。
@@ -40,12 +23,13 @@ OPTIMIZE: 	無駄が多く、ボトルネックになっている。
 CHANGED: 	コードをどのように変更したか。
 NOTE: 	なぜ、こうなったという情報を残す。
 WARNING: 	注意が必要。
+
  */
 
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
     /*　生成個数 */
-    let piece = 1000;
+    let piece = 20000;
     let primes = [
         2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89,
         97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181,
@@ -57,70 +41,22 @@ fn main() /*-> Result<(), Box<dyn std::error::Error>> */
     /* 計測用整数生成
     zeroとtmpはシャドーイング
      */
+
+    // HACK: 512bit
+    // let test512 = return_rands(512, piece, primes);
+    // println!("512 OK!");
+
     // 1024 bit
-    let zero = Integer::from(0);
-    let mut tmp = vec![zero; piece];
-    let test1024 = {
-        let mut cnt = 0;
-        'outer: while cnt < piece {
-            let r = test::random_num(1024);
-
-            for i in primes {
-                if &r % Integer::from(i) == Integer::from(0) {
-                    continue 'outer;
-                }
-            }
-
-            tmp[cnt] = r;
-            cnt += 1;
-        }
-        tmp
-    };
-    println!("Ok"); // HACK: debug
+    let test1024 = return_rands(1024, piece, primes);
+    println!("1024 OK!");
 
     // 2048 bit
-    let zero = Integer::from(0);
-    let mut tmp = vec![zero; piece];
-
-    let test2048 = {
-        let mut cnt = 0;
-        'outer: while cnt < piece {
-            let r = test::random_num(2048);
-
-            for i in primes {
-                if &r % Integer::from(i) == Integer::from(0) {
-                    continue 'outer;
-                }
-            }
-
-            tmp[cnt] = r;
-            cnt += 1;
-        }
-        tmp
-    };
-
-    println!("Ok"); // HACK: debug
+    let test2048 = return_rands(2048, piece, primes);
+    println!("2048 OK!");
 
     // 4096 bit
-    let zero = Integer::from(0);
-    let mut tmp = vec![zero; piece];
-    let test4096 = {
-        let mut cnt = 0;
-        'outer: while cnt < piece {
-            let r = test::random_num(4096);
-
-            for i in primes {
-                if &r % Integer::from(i) == Integer::from(0) {
-                    continue 'outer;
-                }
-            }
-            tmp[cnt] = r;
-            cnt += 1;
-        }
-        tmp
-    };
-
-    println!("Ok"); // HACK: debug
+    let test4096 = return_rands(4096, piece, primes);
+    println!("4096 OK!");
 
     /* TODO: MR_MR計測 */
     for tests in [&test1024, &test2048, &test4096] {
@@ -182,101 +118,23 @@ fn main() /*-> Result<(), Box<dyn std::error::Error>> */
         let end = now.elapsed();
         println!("EEL+EEL {:?}\n{:?}", end, mr_eel_miss);
     }
-    // let m = 2;
-    // let mut rand = RandState::new();
-    // for _ in 0..100 {
-    //     println!("{}", mr::random_num(&mut rand, Integer::from(16)));
-    // }
-    // println!("{:?}", ll::gen_lucas(5));
+}
 
-    // let mut int = Integer::new();
-    // let decimal = "13331";
-    // int.assign(Integer::parse(decimal).unwrap());
+fn return_rands(bits: u64, piece: usize, primes: [i32; 96]) -> Vec<Integer> {
+    let zero = Integer::from(0);
+    let mut tmp = vec![zero; piece.try_into().unwrap()];
+    let mut cnt = 0;
+    'outer: while cnt < piece {
+        let r = test::random_num(bits);
 
-    // let primes: [u32; 20] = [
-    //     3259, 3271, 3299, 3301, 3307, 3313, 3319, 3323, 3329, 3331, 3343, 3347, 3359, 3361, 3371,
-    //     3373, 3389, 3391, 3407, 3413,
-    // ];
+        for i in primes {
+            if &r % Integer::from(i) == Integer::from(0) {
+                continue 'outer;
+            }
+        }
 
-    // let p = Integer::from(int);
-    // println!("{}", euler::is_prime_euler_lagrange(p));
-    // let pp = (&p - Integer::from(1)) / Integer::from(2);
-
-    // println!(
-    //     "{},{}",
-    //     is_prime_miller_rabin(p.clone(), 12),
-    //     is_prime_euler_lagrange(p.clone())
-    // );
-
-    // println!("{}", Integer::from(2).pow_mod(&pp, &p).unwrap());
-
-    // // TODO: 本番
-    // let path = "./test_num.yaml";
-    // let docs = load_yaml(&path);
-    // let doc = &docs[0];
-
-    // // TODO: miller-rabinテストの実行時間計測
-    // // TODO: リュカ-レーマ-テストの実行時間計測
-
-    // // HACK: yamlのテストコード
-    // let path = "./test_num.yaml";
-    // let docs = load_yaml(&path);
-    // let doc = &docs[0];
-    // // numberを取り出す
-    // let number = &doc[0]["number"];
-    // // is_primeを取り出す
-    // let is_prime = &doc[0]["is_prime"];
-
-    // for data in doc.clone() {
-    //     println!(
-    //         "{}, {}",
-    //         data["number"].as_str().unwrap(),
-    //         data["is_prime"].as_bool().unwrap()
-    //     );
-    // }
-
-    // HACK: 乱数生成用テストコード
-    // let mut idx = 0;
-    // let mut rand = RandState::new();
-    // while (idx < 100) {
-    //     let mut i = Integer::from(Integer::random_bits(4096, &mut rand));
-
-    //     // if &i % Integer::from(2) != 0 {
-    //     //     idx += 1;
-    //     // }
-    //     idx += 1;
-    //     println!("{}", idx);
-    // }
-    // HACK: 判定テスト用
-
-    // for i in (2..55500).step_by(2) {
-    //     let p = &p + Integer::from(i);
-
-    //     if is_prime_euler_lagrange(p.clone()) != is_prime_euler_lagrange2(p.clone()) {
-    //         println!("{}", p);
-    //     }
-
-    //     match is_prime_miller_rabin(Integer::from(p), 6) {
-    //         true => println!("=====\n{} is Prime (MR)\n=====", &p),
-    //         false => println!("=====\n{} is Not Prime (MR)\n=====", &p),
-    //     };
-    //     match is_prime_euler_lagrange(Integer::from(p.clone())) {
-    //         true => println!("=====\n{} is Prime\n=====", &p),
-    //         false => println!("=====\n{} is Not Prime\n=====", &p),
-    //     }
-    //     match is_prime_euler_lagrange2(Integer::from(p.clone())) {
-    //         true => println!("=====\n{} is Prime (2)\n=====", &p),
-    //         false => println!("=====\n{} is Not Prime (2)\n=====", &p),
-    //     }
-    // }
-    // // 17 -> 19
-    // let lucas = gen_lucas(20);
-    // for i in 0..100 {
-    //     match is_prime_lucal_lehmer(p.clone(), lucas.clone) {
-    //         true => println!("=====\n{} is Prime\n=====", &p),
-    //         false => println!("=====\n{} is Not Prime\n=====", &p),
-    //     }
-    // }
-
-    // Ok(())
+        tmp[cnt] = r;
+        cnt += 1;
+    }
+    tmp
 }

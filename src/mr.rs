@@ -73,18 +73,6 @@ pub fn is_prime_miller_rabin(p: Integer, k: u64) -> bool {
 }
 
 pub fn random_num(rand: &mut RandState, p: &Integer) -> Integer {
-    // let num: i64 = rand::thread_rng().gen_range(1, 9_213_372_036_854_775_001);
-    // let num = Integer::from(num);
-
-    // if p > num {
-    //     (&p - &num).into()
-    // } else {
-    //     if num.clone() % &p == Integer::from(0) {
-    //         num.clone() % &p + Integer::from(1)
-    //     } else {
-    //         num % &p
-    //     }
-    // }
     let below = p.clone().random_below(rand);
     below
 }
