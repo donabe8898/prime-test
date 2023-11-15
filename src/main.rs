@@ -29,18 +29,20 @@ WARNING: 	注意が必要。
 fn main() /*-> Result<(), Box<dyn std::error::Error>> */
 {
     /*　生成個数 */
-    let piece = 20000;
+    let piece = 12000;
     let primes = [
         2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89,
         97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181,
         191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281,
         283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397,
         401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503,
+        509, 521, 523, 541,
     ];
 
-    /* 計測用整数生成
-    zeroとtmpはシャドーイング
-     */
+    /*
+       計測用整数生成
+       zeroとtmpはシャドーイング
+    */
 
     // HACK: 512bit
     // let test512 = return_rands(512, piece, primes);
@@ -58,69 +60,82 @@ fn main() /*-> Result<(), Box<dyn std::error::Error>> */
     let test4096 = return_rands(4096, piece, primes);
     println!("4096 OK!");
 
-    /* TODO: MR_MR計測 */
+    /* NOTE: MR_MR計測 */
     for tests in [&test1024, &test2048, &test4096] {
         let now: time::Instant = time::Instant::now();
-        let mut mr_mr_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
+        let mut test_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
         for test in tests {
             match test::mr_mr_bench(test.clone()) {
-                (false, false) => mr_mr_miss.2 += 1,
-                (true, false) => mr_mr_miss.0 += 1,
-                (false, true) => mr_mr_miss.1 += 1,
+                (false, false) => test_miss.2 += 1,
+                (true, false) => test_miss.0 += 1,
+                (false, true) => test_miss.1 += 1,
                 (_, _) => {}
             }
         }
         let end = now.elapsed();
-        println!("MRMR {:?}\n{:?}", end, mr_mr_miss);
+        println!(
+            "\n ========= \nMR_MR\n time: {:?}, miss: {:?}\n========= ",
+            end, test_miss
+        );
     }
-    /* TODO: MR_EEL計測 */
+    /* NOTE:  MR_EEL計測 */
     for tests in [&test1024, &test2048, &test4096] {
         let now: time::Instant = time::Instant::now();
-        let mut mr_eel_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
+        let mut test_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
         for test in tests {
             match test::mr_eel_bench(test.clone()) {
-                (false, false) => mr_eel_miss.2 += 1,
-                (true, false) => mr_eel_miss.0 += 1,
-                (false, true) => mr_eel_miss.1 += 1,
+                (false, false) => test_miss.2 += 1,
+                (true, false) => test_miss.0 += 1,
+                (false, true) => test_miss.1 += 1,
                 (_, _) => {}
             }
         }
         let end = now.elapsed();
-        println!("MREEL {:?}\n{:?}", end, mr_eel_miss);
+        println!(
+            "\n ========= \nMR_EEL\n time: {:?}, miss: {:?}\n========= ",
+            end, test_miss
+        );
     }
-    /* TODO: EEL_MR計測 */
+    /* NOTE: EEL_MR計測 */
     for tests in [&test1024, &test2048, &test4096] {
         let now: time::Instant = time::Instant::now();
-        let mut mr_eel_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
+        let mut test_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
         for test in tests {
             match test::eel_mr_bench(test.clone()) {
-                (false, false) => mr_eel_miss.2 += 1,
-                (true, false) => mr_eel_miss.0 += 1,
-                (false, true) => mr_eel_miss.1 += 1,
+                (false, false) => test_miss.2 += 1,
+                (true, false) => test_miss.0 += 1,
+                (false, true) => test_miss.1 += 1,
                 (_, _) => {}
             }
         }
         let end = now.elapsed();
-        println!("EEL+MR {:?}\n{:?}", end, mr_eel_miss);
+        println!(
+            "\n ========= \nEEL_MR\n time: {:?}, miss: {:?}\n========= ",
+            end, test_miss
+        );
     }
-    /* TODO: EEL_EEL計測 */
+    /* NOTE: EEL_EEL計測 */
+
     for tests in [&test1024, &test2048, &test4096] {
         let now: time::Instant = time::Instant::now();
-        let mut mr_eel_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
+        let mut test_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
         for test in tests {
             match test::eel_eel_bench(test.clone()) {
-                (false, false) => mr_eel_miss.2 += 1,
-                (true, false) => mr_eel_miss.0 += 1,
-                (false, true) => mr_eel_miss.1 += 1,
+                (false, false) => test_miss.2 += 1,
+                (true, false) => test_miss.0 += 1,
+                (false, true) => test_miss.1 += 1,
                 (_, _) => {}
             }
         }
         let end = now.elapsed();
-        println!("EEL+EEL {:?}\n{:?}", end, mr_eel_miss);
+        println!(
+            "\n ========= \nEEL_EEL\n time: {:?}, miss: {:?}\n========= ",
+            end, test_miss
+        );
     }
 }
 
-fn return_rands(bits: u64, piece: usize, primes: [i32; 96]) -> Vec<Integer> {
+fn return_rands(bits: u64, piece: usize, primes: [i32; 100]) -> Vec<Integer> {
     let zero = Integer::from(0);
     let mut tmp = vec![zero; piece.try_into().unwrap()];
     let mut cnt = 0;

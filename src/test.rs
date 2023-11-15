@@ -6,7 +6,7 @@
 // use std::num::NonZeroI128;
 
 use super::euler::is_prime_euler_lagrange;
-
+use std::time;
 // use crate::ll::gen_prime_num;
 // use super::ll::is_prime_lucal_lehmer;
 use super::mr::is_prime_miller_rabin;
@@ -25,54 +25,106 @@ use rug::Integer;
 /*  MR+MR */
 #[allow(dead_code)]
 pub fn mr_mr_bench(test_num: Integer) -> (bool, bool) {
+    let now: time::Instant = time::Instant::now();
     match is_prime_miller_rabin(test_num.clone(), 6) {
         true => {
             match is_prime_miller_rabin(test_num.clone() * Integer::from(2) + Integer::from(1), 6) {
-                true => return (false, false),
-                false => return (false, true),
+                true => {
+                    let end = now.elapsed().as_secs_f64();
+                    println!("{}, {}, {:?}", 0, 0, end);
+                    (false, false)
+                }
+                false => {
+                    let end = now.elapsed().as_secs_f64();
+                    println!("{}, {:?}, {}", 0, end, 0);
+                    (false, true)
+                }
             }
         }
-        false => return (true, false),
+        false => {
+            let end = now.elapsed().as_secs_f64();
+            println!("{:?}, {}, {}", end, 0, 0);
+            (true, false)
+        }
     }
 }
 
 /* MR+EEL */
 #[allow(dead_code)]
 pub fn mr_eel_bench(test_num: Integer) -> (bool, bool) {
+    let now: time::Instant = time::Instant::now();
     match is_prime_miller_rabin(test_num.clone(), 6) {
         true => {
             match is_prime_euler_lagrange(test_num.clone() * Integer::from(2) + Integer::from(1)) {
-                true => return (false, false),
-                false => return (false, true),
+                true => {
+                    let end = now.elapsed().as_secs_f64();
+                    println!("{}, {}, {:?}", 0, 0, end);
+                    (false, false)
+                }
+                false => {
+                    let end = now.elapsed().as_secs_f64();
+                    println!("{}, {:?}, {}", 0, end, 0);
+                    (false, true)
+                }
             }
         }
-        false => return (true, false),
+        false => {
+            let end = now.elapsed().as_secs_f64();
+            println!("{:?}, {}, {}", end, 0, 0);
+            (true, false)
+        }
     }
 }
 /* EEL+MR */
 #[allow(dead_code)]
 pub fn eel_mr_bench(test_num: Integer) -> (bool, bool) {
+    let now: time::Instant = time::Instant::now();
     match is_prime_euler_lagrange(test_num.clone()) {
         true => {
             match is_prime_miller_rabin(test_num.clone() * Integer::from(2) + Integer::from(1), 6) {
-                true => return (false, false),
-                false => return (false, true),
+                true => {
+                    let end = now.elapsed().as_secs_f64();
+                    println!("{}, {}, {:?}", 0, 0, end);
+                    (false, false)
+                }
+                false => {
+                    let end = now.elapsed().as_secs_f64();
+                    println!("{}, {:?}, {}", 0, end, 0);
+                    (false, true)
+                }
             }
         }
-        false => return (true, false),
+        false => {
+            let end = now.elapsed().as_secs_f64();
+            println!("{:?}, {}, {}", end, 0, 0);
+            (true, false)
+        }
     }
 }
 /* EEL+EEL */
 #[allow(dead_code)]
 pub fn eel_eel_bench(test_num: Integer) -> (bool, bool) {
+    let now: time::Instant = time::Instant::now();
     match is_prime_euler_lagrange(test_num.clone()) {
         true => {
             match is_prime_euler_lagrange(test_num.clone() * Integer::from(2) + Integer::from(1)) {
-                true => return (false, false),
-                false => return (false, true),
+                true => {
+                    let end = now.elapsed().as_secs_f64();
+                    println!("{}, {}, {:?}", 0, 0, end);
+                    (false, false)
+                }
+                false => {
+                    let end = now.elapsed().as_secs_f64();
+                    println!("{}, {:?}, {}", 0, end, 0);
+                    (false, true)
+                }
             }
         }
-        false => return (true, false),
+        false => {
+            let end = now.elapsed().as_secs_f64();
+            println!("{:?}, {}, {}", end, 0, 0);
+            (true, false)
+        }
     }
 }
 
