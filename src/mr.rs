@@ -1,8 +1,5 @@
-// use rand::Rng;
 use rug::rand::RandState;
 use rug::Integer;
-
-// use std::collections::HashSet;
 
 #[allow(dead_code)]
 pub fn is_prime_miller_rabin(p: Integer, k: u64) -> bool {

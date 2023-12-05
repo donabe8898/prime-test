@@ -1,26 +1,8 @@
-// TODO: テストベンチ用関数の作成
-
-// pub mod ll;
-// mod mr;
-
-// use std::num::NonZeroI128;
-
 use super::euler::is_prime_euler_lagrange;
-use std::time;
-// use crate::ll::gen_prime_num;
-// use super::ll::is_prime_lucal_lehmer;
 use super::mr::is_prime_miller_rabin;
-// use ll::is_prime_lucal_lehmer;
-// use mr::is_prime_miller_rabin;
-// use rand::Rng;
 use rand::Rng;
-// use rug::rand::RandState;
 use rug::Integer;
-
-// use crate::ll::gen_lucas;
-// use crate::test;
-// use yaml::load_yaml;
-// use yaml_rust::{YamlEmitter, YamlLoader};
+use std::time;
 
 /*  MR+MR */
 #[allow(dead_code)]
@@ -148,8 +130,6 @@ pub fn mr_bench(keta: u64) -> u64 {
                 continue;
             }
         };
-        // 上が成功したらbreak
-        // print!("{}", is_prime_miller_rabin(i.clone(), Integer::from(4)));
     }
     println!("{}", miss_mr);
     miss_mr
@@ -181,8 +161,6 @@ pub fn random_num(bit: u64) -> Integer {
         i += 1;
     }
     res
-
-    // 戻り値
 }
 
 pub fn pw(a: &Integer, b: &Integer) -> Integer {

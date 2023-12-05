@@ -1,16 +1,9 @@
 mod euler;
-mod ll;
 mod mr;
 mod test;
 
 use rug::Integer;
 use std::time;
-
-/*
-    - 素数を100個、素数じゃない奇数を100個用意して、それぞれのアルゴリズムで判定。
-    - 判定にかかった時間と正解率のコスパが良いものはどれか
-    - 1024〜4096 bit
-*/
 
 /* アノテーションこめんと
 
@@ -26,8 +19,7 @@ WARNING: 	注意が必要。
 
  */
 
-fn main() /*-> Result<(), Box<dyn std::error::Error>> */
-{
+fn main() {
     /*　生成個数 */
     let piece = 70000;
     let primes = [
