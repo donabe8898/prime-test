@@ -1,0 +1,12 @@
+オペレーティングシステム: Arch Linux 
+KDE Plasma のバージョン: 5.27.10
+KDE Frameworks のバージョン: 5.112.0
+Qt のバージョン: 5.15.11
+カーネルバージョン: 6.6.4-zen1-1-zen (64-bit)
+グラフィックプラットフォーム: Wayland
+プロセッサ: 20 × 12th Gen Intel® Core™ i7-12700H
+メモリ: 15.2 GiB の RAM
+グラフィックプロセッサ: Mesa Intel® Graphics
+製造元: Thirdwave Corporation
+製品名: UL7C-AA3
+システムのバージョン: M75737-403
