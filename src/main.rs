@@ -151,7 +151,10 @@ fn main() {
         let mut test_miss = (0, 0, 0); // (1回目でmiss, 2回目でmiss, missなし)
         for test in tests {
             match test::eel_eel_bench(test.clone()) {
-                (false, false) => test_miss.2 += 1,
+                (false, false) => {
+                    safe_primes.push(test.clone());
+                    test_miss.2 += 1
+                }
                 (true, false) => test_miss.0 += 1,
                 (false, true) => test_miss.1 += 1,
                 (_, _) => {}
