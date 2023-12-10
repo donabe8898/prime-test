@@ -137,6 +137,7 @@ pub fn mr_bench(keta: u64) -> u64 {
 
 pub fn random_num(bit: u64) -> Integer {
     let mut str_res: String = String::new();
+
     // 初期状態で最大bitを1にする
     str_res += "1";
 
@@ -148,10 +149,12 @@ pub fn random_num(bit: u64) -> Integer {
             str_res += "0";
         }
     }
+
     // 一旦逆順にする
     let rev_str: &String = &str_res;
     let rev_str = rev_str.chars().rev().collect::<String>();
-    // 2^n計算 ラムダ式使える?
+
+    // 2進数表記から10進数へ変換
     let mut res = Integer::from(0);
     let mut i = 0;
     for c in rev_str.chars() {

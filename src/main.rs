@@ -69,7 +69,7 @@ fn main() {
     }
 
     println!("safe_primes ===================");
-    if (!safe_primes.is_empty()) {
+    if !safe_primes.is_empty() {
         for safe_prime in safe_primes {
             print!("-> ");
             println!("{}", safe_prime);
@@ -102,7 +102,7 @@ fn main() {
     }
 
     println!("safe_primes ===================");
-    if (!safe_primes.is_empty()) {
+    if !safe_primes.is_empty() {
         for safe_prime in safe_primes {
             print!("-> ");
             println!("{}", safe_prime);
@@ -135,7 +135,7 @@ fn main() {
     }
 
     println!("safe_primes ===================");
-    if (!safe_primes.is_empty()) {
+    if !safe_primes.is_empty() {
         for safe_prime in safe_primes {
             print!("-> ");
             println!("{}", safe_prime);
@@ -168,7 +168,7 @@ fn main() {
     }
 
     println!("safe_primes ===================");
-    if (!safe_primes.is_empty()) {
+    if !safe_primes.is_empty() {
         for safe_prime in safe_primes {
             print!("-> ");
             println!("{}", safe_prime);
