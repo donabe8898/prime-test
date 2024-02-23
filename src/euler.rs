@@ -1,4 +1,19 @@
+//! オイラーラグランジュの定理を使ったやつ
+
 use rug::Integer;
+
+/// オイラーラグランジュの定理を使った素数判定
+///
+/// # 引数
+///
+/// * `q` -  素数かどうかを判定したい数. 多倍長整数型
+///
+/// # 例
+///
+/// ```
+/// let r = is_prime_euler_lagrange(Integer::from(13));
+/// assert_eq!(r, true);
+/// ```
 
 pub fn is_prime_euler_lagrange(q: Integer) -> bool {
     let p: Integer = (&q - Integer::from(1)) / Integer::from(2);

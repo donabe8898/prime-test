@@ -1,5 +1,20 @@
+//! Miller-Rabin素数判定法に使うメソッドモジュール
+
 use rug::rand::RandState;
 use rug::Integer;
+
+/// Miller-Rabin素数判定法を使った素数判定メソッド
+///
+/// # 引数
+///
+/// * `p` - 素数かどうかを判定したい数.
+/// * `k` - 素数判定のテスト回数. 多いほど正確に判定される.
+///
+/// # 例
+/// ```
+/// let r = is_prime_miller_rabin(Integer::from(13),5);
+/// assert_eq!(r, true);
+/// ```
 
 #[allow(dead_code)]
 pub fn is_prime_miller_rabin(p: Integer, k: u64) -> bool {
@@ -68,6 +83,13 @@ pub fn is_prime_miller_rabin(p: Integer, k: u64) -> bool {
     };
     res
 }
+
+/// Integer型の乱数を生成するメソッド
+///
+/// # 引数
+///
+/// * `rand` - シード
+/// * `p` - 乱数の最大値
 
 pub fn random_num(rand: &mut RandState, p: &Integer) -> Integer {
     let below = p.clone().random_below(rand);

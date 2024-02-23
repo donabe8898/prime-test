@@ -1,10 +1,41 @@
+//! mr.rsとeuler.rsを組み合わせてテストするモジュール
+
 use super::euler::is_prime_euler_lagrange;
 use super::mr::is_prime_miller_rabin;
 use rand::Rng;
 use rug::Integer;
 use std::time;
 
-/*  MR+MR */
+/// 素数候補`p`に対してMiller-Rabinテスト, 安全素数候補`2p+1`に対してもMiller-Rabinテストを行う.
+///
+///
+/// 1回目および2回目のテストで合成数だと判定されたらその時点で終了.
+///
+///
+/// 2回目のテストもクリアすれば **素数かもしれない** と判定して終了.
+///
+/// # 引数
+///
+/// * `test_num` - 安全素数かどうかを判定したい値
+///
+/// # 例
+///
+/// ```
+/// let safe = match test::mr_mr_bench(Integer::from(5)) {
+///     (false, false) => true
+///     (true, false) => false,
+///     (false, true) => false,
+///     (_, _) => {false}
+/// }
+/// // 2*5+1=11は素数なので11は安全素数
+/// assert_eq!(safe,true);
+/// ```
+///
+/// # 出力
+///
+/// 1つの素数候補を判定し終わった時間が標準出力される.
+/// 出力結果を保存したい場合は`$ cargo run --release > hogehoge.txt`で渡す(UNIX系OSの場合)
+
 #[allow(dead_code)]
 pub fn mr_mr_bench(test_num: Integer) -> (bool, bool) {
     let now: time::Instant = time::Instant::now();
@@ -31,7 +62,37 @@ pub fn mr_mr_bench(test_num: Integer) -> (bool, bool) {
     }
 }
 
-/* MR+EEL */
+/// 素数候補`p`に対してMiller-Rabinテスト, 安全素数候補`2p+1`に対してEuler-lagrangeテストを行う.
+///
+///
+/// 1回目および2回目のテストで合成数だと判定されたらその時点で終了.
+///
+///
+/// 2回目のテストもクリアすれば **素数かもしれない** と判定して終了.
+///
+///
+/// # 引数
+///
+/// * `test_num` - 安全素数かどうかを判定したい値
+///
+/// # 例
+///
+/// ```
+/// let not_safe = match test::mr_eel_bench(Integer::from(13)) {
+///     (false, false) => false
+///     (true, false) => false,
+///     (false, true) => true,
+///     (_, _) => {false}
+/// }
+///
+/// assert_eq!(not_safe, true);
+/// ```
+///
+/// # 出力
+///
+/// 1つの素数候補を判定し終わった時間が標準出力される.
+/// 出力結果を保存したい場合は`$ cargo run --release > hogehoge.txt`で渡す(UNIX系OSの場合)
+
 #[allow(dead_code)]
 pub fn mr_eel_bench(test_num: Integer) -> (bool, bool) {
     let now: time::Instant = time::Instant::now();
@@ -57,7 +118,39 @@ pub fn mr_eel_bench(test_num: Integer) -> (bool, bool) {
         }
     }
 }
-/* EEL+MR */
+
+
+/// 素数候補`p`に対してEuler-lagrangeテスト, 安全素数候補`2p+1`に対してMiller-Rabinテストを行う.
+///
+///
+/// 1回目および2回目のテストで合成数だと判定されたらその時点で終了.
+///
+///
+/// 2回目のテストもクリアすれば **素数かもしれない** と判定して終了.
+///
+///
+/// # 引数
+///
+/// * `test_num` - 安全素数かどうかを判定したい値
+///
+/// # 例
+///
+/// ```
+/// let not_prime = match test::ell_mr_bench(Integer::from(12)) {
+///     (false, false) => false
+///     (true, false) => true,
+///     (false, true) => false,
+///     (_, _) => {false}
+/// }
+///
+/// assert_eq!(not_prime, true);
+/// ```
+///
+/// # 出力
+///
+/// 1つの素数候補を判定し終わった時間が標準出力される.
+/// 出力結果を保存したい場合は`$ cargo run --release > hogehoge.txt`で渡す(UNIX系OSの場合)
+
 #[allow(dead_code)]
 pub fn eel_mr_bench(test_num: Integer) -> (bool, bool) {
     let now: time::Instant = time::Instant::now();
@@ -83,7 +176,38 @@ pub fn eel_mr_bench(test_num: Integer) -> (bool, bool) {
         }
     }
 }
-/* EEL+EEL */
+
+
+/// 素数候補`p`に対してEuler-lagrangeテスト, 安全素数候補`2p+1`に対してもEuler-lagrangeテストを行う.
+///
+///
+/// 1回目および2回目のテストで合成数だと判定されたらその時点で終了.
+///
+///
+/// 2回目のテストもクリアすれば **素数かもしれない** と判定して終了.
+///
+/// # 引数
+///
+/// * `test_num` - 安全素数かどうかを判定したい値
+///
+/// # 例
+///
+/// ```
+/// let not_prime = match test::ell_eel_bench(Integer::from(21)) {
+///     (false, false) => false
+///     (true, false) => true,
+///     (false, true) => false,
+///     (_, _) => {false}
+/// }
+///
+/// assert_eq!(not_prime, true);
+/// ```
+///
+/// # 出力
+///
+/// 1つの素数候補を判定し終わった時間が標準出力される.
+/// 出力結果を保存したい場合は`$ cargo run --release > hogehoge.txt`で渡す(UNIX系OSの場合)
+
 #[allow(dead_code)]
 pub fn eel_eel_bench(test_num: Integer) -> (bool, bool) {
     let now: time::Instant = time::Instant::now();
@@ -135,6 +259,19 @@ pub fn mr_bench(keta: u64) -> u64 {
     miss_mr
 }
 
+/// rug::Integer型の乱数を返すメソッド
+///
+/// # 引数
+/// * `bit` - 乱数の上限桁数（2進数に変換したときの桁数）
+///
+/// # 例
+/// ```
+/// let m = random_num(3);
+/// // 0b100 ~ 0b111
+/// assert_eq!(true, (Integer::from(4) <= m && m <= Integer::from(7)))
+/// ```
+///
+
 pub fn random_num(bit: u64) -> Integer {
     let mut str_res: String = String::new();
 
@@ -165,6 +302,22 @@ pub fn random_num(bit: u64) -> Integer {
     }
     res
 }
+
+/// べき乗の計算をするメソッド
+///
+/// rug::Integer型同士の累乗計算ができる.
+///
+/// # 引数
+/// * `a` - 底
+/// * `b` - 冪指数
+///
+/// # 例
+///
+/// ```
+/// let p = pw(Integer::from(2), Integer::from(2));
+/// assert_eq!(4, p);
+/// ```
+///
 
 pub fn pw(a: &Integer, b: &Integer) -> Integer {
     let mut ret: Integer = Integer::from(1);
