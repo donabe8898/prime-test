@@ -8,3 +8,4 @@ cargo run --release > hogehoge.txt
 ```
 
 # License
+LGPLv2.1
