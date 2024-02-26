@@ -7,9 +7,9 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1bd55e5c-d17e-41f0-8e8c-a146aee03acf" name="変更" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="1bd55e5c-d17e-41f0-8e8c-a146aee03acf" name="変更" comment="クリーンな状態でどうぞ">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,11 +95,18 @@
       <updated>1701747657829</updated>
       <workItem from="1701747658835" duration="58000" />
       <workItem from="1708674464797" duration="187000" />
-      <workItem from="1708674807533" duration="22000" />
+      <workItem from="1708674807533" duration="166000" />
+      <workItem from="1708699537954" duration="112000" />
+      <workItem from="1708921451728" duration="41000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ライセンスの設定をする&#10;&#10;Signed-off-by: donabe8898 &lt;60559703+donabe8898@users.noreply.github.com&gt;" />
+    <MESSAGE value="クリーンな状態でどうぞ" />
+    <option name="LAST_COMMIT_MESSAGE" value="クリーンな状態でどうぞ" />
   </component>
 </project>
