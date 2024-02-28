@@ -18,6 +18,20 @@ use std::time;
 ///
 /// * `test_num` - 安全素数かどうかを判定したい値
 ///
+///
+/// # 出力
+///
+/// 1つの素数候補を判定し終わった時間が標準出力される.
+/// 出力結果を保存したい場合は`$ cargo run --release > hogehoge.txt`で渡す(UNIX系OSの場合)
+///
+/// # 戻り値
+///
+/// ```rust
+/// (true, false)   // 1回目のテストで素数ではないと判定された（合成数）
+/// (false, true)   // 2回目のテストで素数ではないと判定された(素数かもしれないが, 2p+1は素数ではない)
+/// (false, false)  // p, 2p+1ともに素数かもしれないと判定された
+/// ```
+///
 /// # 例
 ///
 /// ```
@@ -30,11 +44,7 @@ use std::time;
 /// // 2*5+1=11は素数なので11は安全素数
 /// assert_eq!(safe,true);
 /// ```
-///
-/// # 出力
-///
-/// 1つの素数候補を判定し終わった時間が標準出力される.
-/// 出力結果を保存したい場合は`$ cargo run --release > hogehoge.txt`で渡す(UNIX系OSの場合)
+
 
 #[allow(dead_code)]
 pub fn mr_mr_bench(test_num: Integer) -> (bool, bool) {
@@ -75,6 +85,20 @@ pub fn mr_mr_bench(test_num: Integer) -> (bool, bool) {
 ///
 /// * `test_num` - 安全素数かどうかを判定したい値
 ///
+///
+/// # 出力
+///
+/// 1つの素数候補を判定し終わった時間が標準出力される.
+/// 出力結果を保存したい場合は`$ cargo run --release > hogehoge.txt`で渡す(UNIX系OSの場合)
+///
+/// # 戻り値
+///
+/// ```rust
+/// (true, false)   // 1回目のテストで素数ではないと判定された（合成数）
+/// (false, true)   // 2回目のテストで素数ではないと判定された(素数かもしれないが, 2p+1は素数ではない)
+/// (false, false)  // p, 2p+1ともに素数かもしれないと判定された
+/// ```
+///
 /// # 例
 ///
 /// ```
@@ -87,11 +111,7 @@ pub fn mr_mr_bench(test_num: Integer) -> (bool, bool) {
 ///
 /// assert_eq!(not_safe, true);
 /// ```
-///
-/// # 出力
-///
-/// 1つの素数候補を判定し終わった時間が標準出力される.
-/// 出力結果を保存したい場合は`$ cargo run --release > hogehoge.txt`で渡す(UNIX系OSの場合)
+
 
 #[allow(dead_code)]
 pub fn mr_eel_bench(test_num: Integer) -> (bool, bool) {
@@ -133,6 +153,20 @@ pub fn mr_eel_bench(test_num: Integer) -> (bool, bool) {
 ///
 /// * `test_num` - 安全素数かどうかを判定したい値
 ///
+///
+/// # 出力
+///
+/// 1つの素数候補を判定し終わった時間が標準出力される.
+/// 出力結果を保存したい場合は`$ cargo run --release > hogehoge.txt`で渡す(UNIX系OSの場合)
+///
+/// # 戻り値
+///
+/// ```rust
+/// (true, false)   // 1回目のテストで素数ではないと判定された（合成数）
+/// (false, true)   // 2回目のテストで素数ではないと判定された(素数かもしれないが, 2p+1は素数ではない)
+/// (false, false)  // p, 2p+1ともに素数かもしれないと判定された
+/// ```
+///
 /// # 例
 ///
 /// ```
@@ -145,11 +179,7 @@ pub fn mr_eel_bench(test_num: Integer) -> (bool, bool) {
 ///
 /// assert_eq!(not_prime, true);
 /// ```
-///
-/// # 出力
-///
-/// 1つの素数候補を判定し終わった時間が標準出力される.
-/// 出力結果を保存したい場合は`$ cargo run --release > hogehoge.txt`で渡す(UNIX系OSの場合)
+
 
 #[allow(dead_code)]
 pub fn eel_mr_bench(test_num: Integer) -> (bool, bool) {
@@ -190,6 +220,20 @@ pub fn eel_mr_bench(test_num: Integer) -> (bool, bool) {
 ///
 /// * `test_num` - 安全素数かどうかを判定したい値
 ///
+///
+/// # 出力
+///
+/// 1つの素数候補を判定し終わった時間が標準出力される.
+/// 出力結果を保存したい場合は`$ cargo run --release > hogehoge.txt`で渡す(UNIX系OSの場合)
+///
+/// # 戻り値
+///
+/// ```rust
+/// (true, false)   // 1回目のテストで素数ではないと判定された（合成数）
+/// (false, true)   // 2回目のテストで素数ではないと判定された(素数かもしれないが, 2p+1は素数ではない)
+/// (false, false)  // p, 2p+1ともに素数かもしれないと判定された
+/// ```
+///
 /// # 例
 ///
 /// ```
@@ -202,11 +246,7 @@ pub fn eel_mr_bench(test_num: Integer) -> (bool, bool) {
 ///
 /// assert_eq!(not_prime, true);
 /// ```
-///
-/// # 出力
-///
-/// 1つの素数候補を判定し終わった時間が標準出力される.
-/// 出力結果を保存したい場合は`$ cargo run --release > hogehoge.txt`で渡す(UNIX系OSの場合)
+
 
 #[allow(dead_code)]
 pub fn eel_eel_bench(test_num: Integer) -> (bool, bool) {
@@ -234,6 +274,13 @@ pub fn eel_eel_bench(test_num: Integer) -> (bool, bool) {
     }
 }
 
+/// miller-rabinテストのデバッグ用コード
+///
+/// 現在は使用されない
+///
+/// # 引数
+///
+/// * `keta` - 桁数
 #[allow(dead_code)]
 pub fn mr_bench(keta: u64) -> u64 {
     let mut miss_mr = 0u64;

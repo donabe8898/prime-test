@@ -2,6 +2,7 @@
 
 use rug::rand::RandState;
 use rug::Integer;
+use crate::test;
 
 /// Miller-Rabin素数判定法を使った素数判定メソッド
 ///
@@ -15,6 +16,13 @@ use rug::Integer;
 /// let r = is_prime_miller_rabin(Integer::from(13),5);
 /// assert_eq!(r, true);
 /// ```
+///
+/// # 使用箇所
+///
+/// - [test::mr_mr_bench](test::mr_mr_bench)
+/// - [test::mr_eel_bench](test::mr_eel_bench)
+/// - [test::eel_mr_bench](test::eel_mr_bench)
+///
 
 #[allow(dead_code)]
 pub fn is_prime_miller_rabin(p: Integer, k: u64) -> bool {
